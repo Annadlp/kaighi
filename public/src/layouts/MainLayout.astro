@@ -20,11 +20,12 @@ const isActive = (href: string) => {
 };
 
 const nav = [
+  { href: '/about', label: 'О Каиги' },
   { href: '/voices', label: 'Голоса' },
   { href: '/stories', label: 'Истории' },
   { href: '/table', label: 'Стол' },
   { href: '/night', label: 'Предания ночи' },
-  { href: '/guestbook', label: 'Гостевая' },
+  { href: '/guestbook', label: 'Контакты' },
 ];
 ---
 
@@ -37,12 +38,10 @@ const nav = [
     <title>{title} | Kaighi</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Plus+Jakarta+Sans:wght@500;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:wght@400;500;600&display=swap" rel="stylesheet" />
   </head>
   <body class="day-shell">
     <header class="site-header">
-      <a class="site-logo" href="/">KAIGHI</a>
-
       <nav class="site-nav" aria-label="Главная навигация">
         {nav.map((item) => (
           <a class="nav-link" href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
@@ -50,6 +49,8 @@ const nav = [
           </a>
         ))}
       </nav>
+      <a class="site-logo" href="/" aria-label="Kaighi home">КАИГИ</a>
+      <p class="site-subtitle">общественная яранга на краю земли</p>
     </header>
 
     <main class="site-main">
@@ -57,8 +58,28 @@ const nav = [
     </main>
 
     <footer class="site-footer">
-      <div>© {new Date().getFullYear()} Kaighi. Space by Aivana Enmynkau.</div>
-      <div>Kaighi is not content. Kaighi is a place.</div>
+      <div class="footer-copy">
+        <div class="footer-mark">◌◌◌</div>
+        <p>© {new Date().getFullYear()} Kaighi.</p>
+        <p>Копирование любых материалов сайта возможно только с разрешения правообладателя.</p>
+      </div>
+      <div>
+        <h2>Разделы</h2>
+        <a href="/voices">Голоса</a>
+        <a href="/stories">Истории</a>
+        <a href="/table">Стол</a>
+        <a href="/guestbook">Контакты</a>
+      </div>
+      <div>
+        <h2>Подписка</h2>
+        <form class="subscribe-form">
+          <input aria-label="Email" />
+          <button type="button">Подписаться</button>
+        </form>
+        <div class="socials" aria-label="Социальные ссылки">
+          <span>f</span><span>◎</span><span>𝕏</span><span>in</span>
+        </div>
+      </div>
     </footer>
   </body>
 </html>

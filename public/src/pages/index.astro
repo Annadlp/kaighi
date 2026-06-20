@@ -14,13 +14,13 @@ const latestRecipe = table.sort((a, b) => b.data.date.valueOf() - a.data.date.va
 <MainLayout title="Главная" lang="ru">
   <section class="home-hero" data-editable="source" data-path="/src/pages/index.astro" data-key="hero">
     <p class="kicker home-kicker">общественная яранга в Наукане</p>
-    <h1 class="home-title">KAIGHI</h1>
+    <h1 class="home-title">КАИГИ</h1>
 
     <div class="home-grid">
       <h2 class="home-statement">Голоса, истории и память</h2>
 
       <div class="home-text">
-        <p class="home-lead">
+        <p>
           Kaighi — цифровая яранга для рассказов, голосов, еды и семейной памяти.
         </p>
         <p>
@@ -32,11 +32,24 @@ const latestRecipe = table.sort((a, b) => b.data.date.valueOf() - a.data.date.va
     </div>
   </section>
 
+  <section class="section feature" aria-labelledby="feature-title">
+    <div class="feature-image">
+      <img src={latestVoice?.data.coverImage ?? '/uploads/kaighi-hero.png'} alt="Kaighi" />
+    </div>
+
+    <div>
+      <p class="section-kicker">Последний голос</p>
+      <h2 id="feature-title" class="feature-title"><a href={latestVoice ? `/voices/${latestVoice.id}` : '/voices'}>{latestVoice?.data.title ?? 'Первый голос'}</a></h2>
+      <p class="section-intro">{latestVoice?.data.shortDescription ?? 'Подкасты, разговоры и записи, в которых память звучит голосом.'}</p>
+      <a class="button-link" href={latestVoice ? `/voices/${latestVoice.id}` : '/voices'}>Открыть выпуск</a>
+    </div>
+  </section>
+
   <section class="section" aria-labelledby="entrances-title">
     <div class="section-head">
       <div>
-        <p class="section-kicker">Три входа</p>
-        <h2 id="entrances-title" class="section-title">Слушать, читать, садиться за стол</h2>
+        <p class="section-kicker">Истории и рассказы</p>
+        <h2 id="entrances-title" class="section-title">Голоса, рассказы и стол</h2>
       </div>
     </div>
 
@@ -64,25 +77,10 @@ const latestRecipe = table.sort((a, b) => b.data.date.valueOf() - a.data.date.va
     </div>
   </section>
 
-  {latestVoice && (
-    <section class="section feature" aria-labelledby="feature-title">
-      <div class="feature-image">
-        <img src={latestVoice.data.coverImage ?? '/uploads/kaighi-hero.png'} alt="Kaighi" />
-      </div>
-
-      <div>
-        <p class="section-kicker">Последний выпуск</p>
-        <h2 id="feature-title" class="feature-title"><a href={`/voices/${latestVoice.id}`}>{latestVoice.data.title}</a></h2>
-        <p class="section-intro">{latestVoice.data.shortDescription}</p>
-        <a class="button-link" href={`/voices/${latestVoice.id}`}>Открыть выпуск</a>
-      </div>
-    </section>
-  )}
-
   <section class="band" data-editable="source" data-path="/src/pages/index.astro" data-key="closing">
     <div>
-      <p class="section-kicker">Что здесь живет</p>
-      <h2>Голоса. Истории. Еда. Память.</h2>
+      <p class="section-kicker">Схема</p>
+      <h2>Каиги</h2>
     </div>
     <div>
       <p>
