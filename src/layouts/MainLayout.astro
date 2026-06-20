@@ -1,0 +1,64 @@
+---
+import '../global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  lang?: 'ru' | 'en';
+}
+
+const {
+  title,
+  description = 'Kaighi — цифровая общественная яранга: голоса, истории, еда и семейная память.',
+  lang = 'ru',
+} = Astro.props;
+
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isActive = (href: string) => {
+  const clean = href.replace(/\/$/, '') || '/';
+  return currentPath === clean || (clean !== '/' && currentPath.startsWith(clean + '/'));
+};
+
+const nav = [
+  { href: '/voices', label: 'Голоса' },
+  { href: '/stories', label: 'Истории' },
+  { href: '/table', label: 'Стол' },
+  { href: '/night', label: 'Предания ночи' },
+  { href: '/guestbook', label: 'Гостевая' },
+];
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{title} | Kaighi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Plus+Jakarta+Sans:wght@500;700;800;900&display=swap" rel="stylesheet" />
+  </head>
+  <body class="day-shell">
+    <header class="site-header">
+      <a class="site-logo" href="/">KAIGHI</a>
+
+      <nav class="site-nav" aria-label="Главная навигация">
+        {nav.map((item) => (
+          <a class="nav-link" href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
+            {item.label}
+          </a>
+        ))}
+      </nav>
+    </header>
+
+    <main class="site-main">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div>© {new Date().getFullYear()} Kaighi. Space by Aivana Enmynkau.</div>
+      <div>Kaighi is not content. Kaighi is a place.</div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,31 @@
+---
+import { getCollection } from 'astro:content';
+import MainLayout from '../layouts/MainLayout.astro';
+
+const notes = await getCollection('guestbook', ({ data }) => data.language === 'ru');
+const sortedNotes = notes.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<MainLayout title="Гостевая" lang="ru">
+  <section class="page-hero" data-editable="source" data-path="/src/pages/guestbook.astro" data-key="hero">
+    <p class="kicker">Kaighi / оставить след</p>
+    <h1>Гостевая</h1>
+    <p>Место для сообщений, воспоминаний, имён, коротких откликов и благодарностей.</p>
+  </section>
+
+  <section class="guestbook-list" aria-label="Записи гостевой">
+    {sortedNotes.length > 0 ? sortedNotes.map((note) => (
+      <article class="guestbook-note">
+        <p class="meta">
+          {note.data.name}{note.data.location ? ` · ${note.data.location}` : ''} · {note.data.date.toLocaleDateString('ru-RU', { year: 'numeric', month: 'long', day: 'numeric' })}
+        </p>
+        <blockquote>{note.body}</blockquote>
+      </article>
+    )) : (
+      <article class="guestbook-note">
+        <p class="meta">скоро</p>
+        <blockquote>Здесь появятся первые записи гостевой книги.</blockquote>
+      </article>
+    )}
+  </section>
+</MainLayout>

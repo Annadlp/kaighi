@@ -1,0 +1,43 @@
+KAIGHI_cloudcannon_ready/
+├── cloudcannon.config.yml          # CloudCannon collections, uploads, inputs, schemas
+├── README_CLOUDCANNON.md           # Build and deployment notes
+├── package.json
+├── package-lock.json
+├── astro.config.mjs
+├── tailwind.config.mjs
+├── public/
+│   ├── images/
+│   │   └── kaighi-wing.svg         # Day-theme background mark
+│   └── uploads/                    # Editor uploads and content images
+│       ├── kaighi-hero.png
+│       └── mom.png
+├── .cloudcannon/
+│   └── schemas/                    # Templates for new CloudCannon entries
+│       ├── voice.md
+│       ├── story.md
+│       ├── recipe.md
+│       └── guestbook.md
+└── src/
+    ├── global.css                  # Full site design system
+    ├── content.config.ts           # Astro content collection schemas
+    ├── components/
+    │   └── AudioPlayer.astro
+    ├── layouts/
+    │   ├── MainLayout.astro
+    │   └── NightLayout.astro
+    ├── content/
+    │   ├── voices/
+    │   ├── stories/
+    │   ├── table/
+    │   └── guestbook/
+    └── pages/
+        ├── index.astro
+        ├── about.astro
+        ├── guestbook.astro
+        ├── night/index.astro
+        ├── voices/index.astro
+        ├── voices/[slug].astro
+        ├── stories/index.astro
+        ├── stories/[slug].astro
+        ├── table/index.astro
+        └── table/[slug].astro

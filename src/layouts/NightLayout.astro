@@ -1,0 +1,42 @@
+---
+import '../global.css';
+
+const {
+  title = 'Предания ночи — KAIGHI',
+  description = 'Мифы, ночные истории и шепот яранги',
+  lang = 'ru',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Plus+Jakarta+Sans:wght@500;700;800;900&display=swap" rel="stylesheet" />
+  </head>
+
+  <body class="theme-night">
+    <div class="night-shell">
+      <header class="night-header">
+        <a class="night-logo" href="/">KAIGHI</a>
+
+        <nav class="night-nav" aria-label="Главная навигация">
+          <a href="/voices">Голоса</a>
+          <a href="/stories">Истории</a>
+          <a href="/table">Стол</a>
+          <a href="/night">Предания ночи</a>
+          <a href="/guestbook">Гостевая</a>
+        </nav>
+      </header>
+
+      <main class="night-main">
+        <slot />
+      </main>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,95 @@
+---
+import { getCollection } from 'astro:content';
+import MainLayout from '../layouts/MainLayout.astro';
+
+const voices = await getCollection('voices', ({ data }) => data.language === 'ru');
+const stories = await getCollection('stories', ({ data }) => data.language === 'ru');
+const table = await getCollection('table', ({ data }) => data.language === 'ru');
+
+const latestVoice = voices.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())[0];
+const latestStory = stories.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())[0];
+const latestRecipe = table.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())[0];
+---
+
+<MainLayout title="Главная" lang="ru">
+  <section class="home-hero" data-editable="source" data-path="/src/pages/index.astro" data-key="hero">
+    <p class="kicker home-kicker">общественная яранга в Наукане</p>
+    <h1 class="home-title">KAIGHI</h1>
+
+    <div class="home-grid">
+      <h2 class="home-statement">Голоса, истории и память</h2>
+
+      <div class="home-text">
+        <p class="home-lead">
+          Kaighi — цифровая яранга для рассказов, голосов, еды и семейной памяти.
+        </p>
+        <p>
+          В Наукане Каиги был большой общинной ярангой: местом, где люди собирались,
+          говорили, слушали, делились едой, новостями, памятью и историями.
+          Сегодня цифровой Kaighi продолжает эту форму онлайн.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="entrances-title">
+    <div class="section-head">
+      <div>
+        <p class="section-kicker">Три входа</p>
+        <h2 id="entrances-title" class="section-title">Слушать, читать, садиться за стол</h2>
+      </div>
+    </div>
+
+    <div class="entry-grid">
+      <article class="entry-card">
+        <p class="card-kicker">Голоса</p>
+        <h3><a href={latestVoice ? `/voices/${latestVoice.id}` : '/voices'}>{latestVoice?.data.title ?? 'Первый голос'}</a></h3>
+        <p>{latestVoice?.data.shortDescription ?? 'Подкасты, разговоры и записи, в которых память звучит голосом.'}</p>
+        <a class="button-link" href="/voices">Слушать</a>
+      </article>
+
+      <article class="entry-card">
+        <p class="card-kicker">Истории</p>
+        <h3><a href={latestStory ? `/stories/${latestStory.id}` : '/stories'}>{latestStory?.data.title ?? 'Первая история'}</a></h3>
+        <p>{latestStory?.data.intro ?? 'Рассказы о доме, дороге, языке, женщинах, смехе и памяти.'}</p>
+        <a class="button-link" href="/stories">Читать</a>
+      </article>
+
+      <article class="entry-card">
+        <p class="card-kicker">Стол</p>
+        <h3><a href={latestRecipe ? `/table/${latestRecipe.id}` : '/table'}>{latestRecipe?.data.title ?? 'Рецепты памяти'}</a></h3>
+        <p>{latestRecipe?.data.shortMemory ?? 'Еда как место, где простые вещи держат семью и память.'}</p>
+        <a class="button-link" href="/table">Сесть за стол</a>
+      </article>
+    </div>
+  </section>
+
+  {latestVoice && (
+    <section class="section feature" aria-labelledby="feature-title">
+      <div class="feature-image">
+        <img src={latestVoice.data.coverImage ?? '/uploads/kaighi-hero.png'} alt="Kaighi" />
+      </div>
+
+      <div>
+        <p class="section-kicker">Последний выпуск</p>
+        <h2 id="feature-title" class="feature-title"><a href={`/voices/${latestVoice.id}`}>{latestVoice.data.title}</a></h2>
+        <p class="section-intro">{latestVoice.data.shortDescription}</p>
+        <a class="button-link" href={`/voices/${latestVoice.id}`}>Открыть выпуск</a>
+      </div>
+    </section>
+  )}
+
+  <section class="band" data-editable="source" data-path="/src/pages/index.astro" data-key="closing">
+    <div>
+      <p class="section-kicker">Что здесь живет</p>
+      <h2>Голоса. Истории. Еда. Память.</h2>
+    </div>
+    <div>
+      <p>
+        Kaighi можно читать как архив, слушать как подкаст, открывать как семейную книгу
+        и пополнять как место, куда возвращаются имена, рецепты и слова.
+      </p>
+      <a class="button-link" href="/guestbook">Оставить след в гостевой</a>
+    </div>
+  </section>
+</MainLayout>

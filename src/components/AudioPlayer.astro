@@ -1,0 +1,23 @@
+---
+interface Props {
+  url: string;
+  title?: string;
+}
+
+const { url, title = 'Kaighi audio episode' } = Astro.props;
+const src = url.includes('iframe=true')
+  ? url
+  : `${url}${url.includes('?') ? '&' : '?'}client_source=small_player&iframe=true`;
+---
+
+<div class="audio-player-container">
+  <iframe
+    src={src}
+    loading="lazy"
+    width="100%"
+    height="200"
+    frameborder="0"
+    scrolling="no"
+    title={title}
+  ></iframe>
+</div>

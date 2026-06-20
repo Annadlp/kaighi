@@ -1,0 +1,127 @@
+source: /
+
+paths:
+  static: public
+  uploads: public/uploads
+
+timezone: Asia/Yerevan
+
+collection_groups:
+  - heading: Content
+    collections:
+      - voices
+      - stories
+      - table
+      - guestbook
+  - heading: Site pages
+    collections:
+      - pages
+
+collections_config:
+  pages:
+    path: src/pages
+    name: Pages
+    icon: wysiwyg
+    output: true
+
+  voices:
+    path: src/content/voices
+    name: Voices
+    icon: mic
+    output: true
+    schemas:
+      default:
+        path: .cloudcannon/schemas/voice.md
+        name: Podcast episode
+
+  stories:
+    path: src/content/stories
+    name: Stories
+    icon: article
+    output: true
+    schemas:
+      default:
+        path: .cloudcannon/schemas/story.md
+        name: Story
+
+  table:
+    path: src/content/table
+    name: Table
+    icon: restaurant
+    output: true
+    schemas:
+      default:
+        path: .cloudcannon/schemas/recipe.md
+        name: Memory recipe
+
+  guestbook:
+    path: src/content/guestbook
+    name: Guestbook
+    icon: rate_review
+    output: false
+    schemas:
+      default:
+        path: .cloudcannon/schemas/guestbook.md
+        name: Guestbook note
+
+_inputs:
+  title:
+    type: text
+    label: Заголовок
+  guestName:
+    type: text
+    label: Имя героини
+  guestBio:
+    type: textarea
+    label: Биография героини
+  language:
+    type: select
+    label: Язык
+    options:
+      values:
+        - ru
+        - en
+  date:
+    type: datetime
+    label: Дата публикации
+    instance_value: NOW
+  audioEmbedUrl:
+    type: url
+    label: Ссылка на Buzzsprout
+    comment: Можно вставить обычную ссылку на эпизод Buzzsprout.
+  shortDescription:
+    type: textarea
+    label: Короткое описание
+  heroQuote:
+    type: textarea
+    label: Главная цитата
+  coverImage:
+    type: image
+    label: Обложка
+  heroImage:
+    type: image
+    label: Главное изображение
+  intro:
+    type: textarea
+    label: Вводный абзац
+  shortMemory:
+    type: textarea
+    label: Память о блюде
+  ingredients:
+    type: array
+    label: Ингредиенты
+  method:
+    type: markdown
+    label: Способ приготовления
+  tags:
+    type: array
+    label: Теги
+  guestbookPrompt:
+    type: textarea
+    label: Вопрос для гостевой
+  name:
+    type: text
+    label: Имя
+  location:
+    type: text
+    label: Место

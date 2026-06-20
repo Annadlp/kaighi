@@ -1,0 +1,28 @@
+---
+import { getCollection } from 'astro:content';
+import MainLayout from '../../layouts/MainLayout.astro';
+
+const voices = await getCollection('voices', ({ data }) => data.language === 'ru');
+const sortedVoices = voices.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<MainLayout title="Голоса" lang="ru">
+  <section class="page-hero" data-editable="source" data-path="/src/pages/voices/index.astro" data-key="hero">
+    <p class="kicker">Kaighi / слушать</p>
+    <h1>Голоса</h1>
+    <p>Подкасты, разговоры и записи, в которых память звучит голосом.</p>
+  </section>
+
+  <section class="list-grid" aria-label="Выпуски подкаста">
+    {sortedVoices.map((voice) => (
+      <article class="list-card">
+        <p class="meta">
+          {voice.data.date.toLocaleDateString('ru-RU', { year: 'numeric', month: 'long', day: 'numeric' })}
+        </p>
+        <h2><a href={`/voices/${voice.id}`}>{voice.data.title}</a></h2>
+        <p>{voice.data.shortDescription}</p>
+        <a class="button-link" href={`/voices/${voice.id}`}>Открыть</a>
+      </article>
+    ))}
+  </section>
+</MainLayout>
