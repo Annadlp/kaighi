@@ -927,3 +927,19 @@ body:has(.night-shell) {
     margin: 24px 0;
   }
 }
+
+/* FIX: align header to KAIGHI */
+
+.site-nav {
+  justify-content: flex-start;
+  margin-bottom: 64px;
+}
+
+.site-logo {
+  transform: none;
+  transform-origin: left center;
+}
+
+.site-subtitle {
+  display: none;
+}
