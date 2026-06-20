@@ -64,8 +64,8 @@ body.day-shell { position: relative; overflow-x: hidden; }
 
 .site-header::before {
   content: "";
-  position: relative;
-  top: 80px;
+  position: absolute;
+  top: 90px;
   left: -260px;
   width: 620px;
   height: 620px;
