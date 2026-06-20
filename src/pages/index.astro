@@ -1,148 +1,96 @@
 ---
-import { getCollection } from 'astro:content';
 import MainLayout from '../layouts/MainLayout.astro';
 
-const allStories = (await getCollection('stories'))
-  .filter(s => s.data.language === 'ru')
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const sideItems = [
+  { title: 'Наукан и море', image: '/uploads/kaighi-hero.png' },
+  { title: 'Наукан — граница двух миров', image: '/uploads/kaighi-hero.png' },
+  { title: 'Память о доме', image: '/uploads/mom.png' },
+  { title: 'Голоса с края земли', image: '/uploads/kaighi-hero.png' },
+];
 
-const allVoices = (await getCollection('voices'))
-  .filter(v => v.data.language === 'ru')
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-
-const allRecipes = (await getCollection('table'))
-  .filter(r => r.data.language === 'ru')
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-
-const heroStories = allStories.slice(0, 4);
-const featuredStory = allStories[0];
-const gridStories = allStories.slice(0, 3);
-
-const fmt = (d: Date) =>
-  d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
+const storyItems = [
+  { title: 'Наукан — граница двух миров', image: '/uploads/kaighi-hero.png' },
+  { title: 'Наукан и море', image: '/uploads/kaighi-hero.png' },
+  { title: 'Память о доме', image: '/uploads/mom.png' },
+];
 ---
 
-<MainLayout title="Главная">
+<MainLayout title="Главная" lang="ru">
+  <section class="hero-shell" aria-label="Kaighi">
+    <div class="wing-layer" aria-hidden="true"></div>
 
-  <!-- ── Hero ─────────────────────────────────────────────── -->
-  <section class="home-hero" aria-label="Главное">
+    <h1 class="site-logo" aria-label="KAIGHI">
+      <span>K</span><span>A</span><span>I</span><span>G</span><span>H</span><span>I</span>
+    </h1>
+
+    <p class="site-subtitle">общественная яранга на краю земли</p>
+
     <div class="hero-grid">
+      <article class="hero-feature">
+        <img src="/uploads/kaighi-hero.png" alt="Наукан" />
+        <p class="meta">28 мая 2022 г.</p>
+        <h2>О Каиги</h2>
+        <p><strong>Kaighi</strong> — цифровая общественная яранга для голосов, историй, рецептов и памяти.</p>
+        <p>Здесь можно слушать подкасты, читать рассказы, собирать семейные рецепты и возвращать имена, слова и следы Наукана.</p>
+      </article>
 
-      <!-- Большое фото слева -->
-      <div class="hero-main">
-        <img
-          src={featuredStory?.data.heroImage ?? '/uploads/kaighi-hero.png'}
-          alt={featuredStory?.data.title ?? 'Каиги'}
-        />
-      </div>
-
-      <!-- Стек статей справа -->
-      <div class="hero-stack">
-        {heroStories.map(story => (
-          <a class="hero-card" href={`/stories/${story.id}`}>
-            <div class="hero-card-thumb">
-              <img
-                src={story.data.heroImage ?? '/uploads/kaighi-hero.png'}
-                alt={story.data.title}
-              />
-            </div>
-            <div class="hero-card-body">
-              <span class="meta">{fmt(story.data.date)}</span>
-              <h3>{story.data.title}</h3>
+      <aside class="hero-list" aria-label="Последние материалы">
+        {sideItems.map((item) => (
+          <a class="hero-card" href="/stories">
+            <img src={item.image} alt="" />
+            <div>
+              <p class="meta">28 мая 2022 г.</p>
+              <h3>{item.title}</h3>
             </div>
           </a>
         ))}
-      </div>
-
+      </aside>
     </div>
   </section>
 
-  <!-- ── О Каиги ───────────────────────────────────────────── -->
-  <section class="about-section" aria-labelledby="about-title">
-    <div class="about-grid">
-      <div class="about-left">
-        <span class="meta">{fmt(featuredStory?.data.date ?? new Date())}</span>
-        <h2 id="about-title">О KAIGHI</h2>
-      </div>
-      <div class="about-text">
-        <p>
-          <strong>Kaighi</strong> (нувукахми, «каиги» — общественная яранга)&thinsp;—
-          заброшенный эскимосский посёлок на мысе Дежнёва.
-        </p>
-        <p>
-          До 1958 года являлся самым восточным поселением Евразии, но затем
-          уступил это звание Узлену. Ныне в качестве урочища входит в российскую
-          часть природно-этнического парка «Берингия» (участок «Узлен»).
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Истории и рассказы ─────────────────────────────────── -->
-  <section class="section" aria-labelledby="stories-title">
-    <div class="section-head">
-      <p class="section-kicker">Истории и рассказы</p>
-      <h2 id="stories-title" class="section-title">Голоса, рассказы и стол</h2>
-    </div>
-
-    <div class="entry-grid">
-      {gridStories.map(story => (
-        <article class="entry-card">
-          <a href={`/stories/${story.id}`}>
-            <div class="entry-card-img">
-              <img
-                src={story.data.heroImage ?? '/uploads/kaighi-hero.png'}
-                alt={story.data.title}
-              />
-            </div>
-          </a>
-          <span class="meta">{fmt(story.data.date)}</span>
-          <h3><a href={`/stories/${story.id}`}>{story.data.title}</a></h3>
-          {story.data.intro && <p>{story.data.intro}</p>}
-          <a class="button-link" href={`/stories/${story.id}`}>Читать</a>
+  <section class="story-section" aria-labelledby="stories-title">
+    <p class="section-kicker">Истории и рассказы</p>
+    <div class="story-grid">
+      {storyItems.map((item) => (
+        <article class="story-card">
+          <img src={item.image} alt="" />
+          <p class="meta">28 мая 2022 г.</p>
+          <h2>{item.title}</h2>
+          <p><strong>Наукан</strong> — место на краю земли, где память держится в голосах, маршрутах, еде и рассказах.</p>
         </article>
       ))}
     </div>
   </section>
 
-  <!-- ── Схема Каиги ────────────────────────────────────────── -->
-  <section class="band" aria-labelledby="schema-title">
-    <div>
-      <p class="section-kicker">Схема</p>
-      <h2 id="schema-title">Каиги</h2>
-    </div>
-    <div>
-      <p>
-        Kaighi можно читать как архив, слушать как подкаст, открывать как
-        семейную книгу и пополнять как место, куда возвращаются имена,
-        рецепты и слова.
-      </p>
-      <a class="button-link" href="/guestbook">Оставить след в гостевой</a>
+  <section class="scheme-section" aria-labelledby="scheme-title">
+    <p class="outline-title">Схема</p>
+    <h2 id="scheme-title">Каиги</h2>
+    <div class="scheme-map" aria-hidden="true">
+      <div class="map-line line-one"></div>
+      <div class="map-line line-two"></div>
+      <div class="map-line line-three"></div>
+      <div class="map-dots"></div>
     </div>
   </section>
 
-  <!-- ── Форма связи ─────────────────────────────────────────── -->
-  <section class="contact-grid" aria-labelledby="contact-title">
-    <div class="contact-left">
-      <p class="contact-intro">Есть вопросы или предложения? Напишите автору сайта, используя эту форму.</p>
-
-      <div class="form-field">
-        <label class="form-label" for="contact-name">Имя</label>
-        <input class="form-input" id="contact-name" type="text" name="name" autocomplete="name" />
+  <section class="contact-section" aria-labelledby="contact-title">
+    <p class="contact-intro">Есть вопросы или предложения? Напишите автору сайта, используя эту форму.</p>
+    <form class="contact-form">
+      <div class="contact-left">
+        <label>
+          <span>Имя</span>
+          <input name="name" />
+        </label>
+        <label>
+          <span>Почта</span>
+          <input name="email" />
+        </label>
+        <button type="button">Отправить</button>
       </div>
-
-      <div class="form-field">
-        <label class="form-label" for="contact-email">Почта</label>
-        <input class="form-input" id="contact-email" type="email" name="email" autocomplete="email" />
-      </div>
-
-      <button class="form-submit" type="submit">Отправить</button>
-    </div>
-
-    <div class="form-field">
-      <label class="form-label" for="contact-message">Сообщение</label>
-      <textarea class="form-textarea" id="contact-message" name="message" rows="8"></textarea>
-    </div>
+      <label class="message-field">
+        <span id="contact-title">Сообщение</span>
+        <textarea name="message"></textarea>
+      </label>
+    </form>
   </section>
-
 </MainLayout>
