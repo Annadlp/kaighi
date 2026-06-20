@@ -12,6 +12,7 @@ collection_groups:
       - voices
       - stories
       - table
+      - night
       - guestbook
   - heading: Site pages
     collections:
@@ -53,6 +54,16 @@ collections_config:
       default:
         path: .cloudcannon/schemas/recipe.md
         name: Memory recipe
+
+  night:
+    path: src/content/night
+    name: Предания ночи
+    icon: bedtime
+    output: true
+    schemas:
+      default:
+        path: .cloudcannon/schemas/night.md
+        name: Предание ночи
 
   guestbook:
     path: src/content/guestbook
