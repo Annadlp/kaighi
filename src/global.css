@@ -68,7 +68,7 @@ body.day-shell::before {
 }
 
 /* ─── Header ─────────────────────────────────────────────────── */
-.site-header { padding: 42px 0 0; }
+.site-header { padding: 58px 0 110; }
 
 .site-nav {
   display: flex;
