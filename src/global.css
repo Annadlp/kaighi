@@ -40,53 +40,57 @@ p { margin: 0 0 1.1rem; }
 h1,h2,h3,h4 { margin: 0; }
 
 /* ─── Day shell: wing watermark ─────────────────────────────── */
-body.day-shell { position: relative; overflow-x: hidden; }
+body.day-shell {
+  position: relative;
+  overflow-x: hidden;
+}
+
+body.day-shell::before {
+  content: "";
+  position: absolute;
+  top: 245px;
+  left: calc((100vw - var(--max)) / 2 - 350px);
+  width: 620px;
+  height: 620px;
+  background: url("/images/kaighi-wing.svg") no-repeat center / contain;
+  opacity: 0.16;
+  pointer-events: none;
+  z-index: 2;
+}
 
 /* ─── Shared layout wrappers ─────────────────────────────────── */
 .site-header,
 .site-main,
 .site-footer {
   position: relative;
-  z-index: 1;
 }
+
 .site-header,
 .site-main {
   width: min(var(--max), calc(100% - var(--gutter) * 2));
   margin: 0 auto;
 }
 
-/* ─── Header ─────────────────────────────────────────────────── */
 .site-header {
-  position: relative;
   z-index: 10;
   padding: 50px 0 110px;
 }
 
-.site-header::before {
-  content: "";
-  position: absolute;
-  top: 90px;
-  left: -260px;
-  width: 620px;
-  height: 620px;
-  background: url("/images/kaighi-wing.svg") no-repeat center / contain;
-  opacity: 0.16;
-  pointer-events: none;
+.site-main {
   z-index: 1;
 }
 
-.site-nav,
-.site-logo {
-  position: relative;
-  z-index: 2;
+.site-footer {
+  z-index: 1;
 }
 
+/* ─── Header ─────────────────────────────────────────────────── */
 .site-nav {
   display: flex;
   justify-content: flex-end;
   align-items: center;
   gap: clamp(14px, 2.6vw, 32px);
-  margin-bottom: 28px;
+  margin-bottom: 76px;
   flex-wrap: wrap;
 }
 
@@ -98,33 +102,35 @@ body.day-shell { position: relative; overflow-x: hidden; }
   letter-spacing: 0.09em;
   line-height: 1;
 }
-.nav-link[aria-current="page"] { color: var(--gold-dark); }
+
+.nav-link[aria-current="page"] {
+  color: var(--gold-dark);
+}
 
 .site-logo {
-    display: block;
-    width: 100%;
-    margin: 0;
-    text-align: left;
-    font-family: var(--font-sans);
-    font-weight: 700;
-    text-transform: uppercase;
-    white-space: nowrap;
-    letter-spacing: 0.045em;
-    font-size: clamp(130px, 18vw, 285px);
-    line-height: 0.76;
-    transform: none;
-    transform-origin: left center;
-  }
-
-.site-subtitle {
-  margin: 36px 0 0 auto;
-  max-width: 540px;
-  text-align: right;
-  font-size: clamp(17px, 2vw, 26px);
-  line-height: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  margin: 0;
+  font-family: var(--font-sans);
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.03em;
+  letter-spacing: 0;
+  font-size: clamp(112px, 14.8vw, 190px);
+  line-height: 0.78;
+  white-space: nowrap;
+  transform: none;
+  transform-origin: left center;
+}
+
+.site-logo span {
+  display: block;
+  line-height: 0.78;
+}
+
+.site-subtitle {
+  display: none;
 }
 
 /* ─── Utility typography ─────────────────────────────────────── */
