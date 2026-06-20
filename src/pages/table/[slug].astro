@@ -1,0 +1,64 @@
+---
+import { getCollection, render } from 'astro:content';
+import MainLayout from '../../layouts/MainLayout.astro';
+
+export async function getStaticPaths() {
+  const recipes = await getCollection('table');
+  return recipes.map(recipe => ({ params: { slug: recipe.id }, props: { recipe } }));
+}
+
+const { recipe } = Astro.props;
+const { Content } = await render(recipe);
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+
+<MainLayout title={recipe.data.title} description={recipe.data.shortMemory}>
+  <article class="article">
+
+    <header class="article-header">
+      <span class="meta">{fmt(recipe.data.date)}</span>
+      <h1>{recipe.data.title}</h1>
+      {recipe.data.shortMemory && (
+        <p class="article-lead">{recipe.data.shortMemory}</p>
+      )}
+    </header>
+
+    {recipe.data.heroImage && (
+      <div class="article-hero-img">
+        <img src={recipe.data.heroImage} alt={recipe.data.title} />
+      </div>
+    )}
+
+    <div class="recipe-layout" style="width:min(900px,100%);margin:0 auto;">
+      {recipe.data.ingredients && recipe.data.ingredients.length > 0 && (
+        <aside class="ingredients">
+          <h2>Ингредиенты</h2>
+          <ul>
+            {recipe.data.ingredients.map(ing => <li>{ing}</li>)}
+          </ul>
+        </aside>
+      )}
+
+      <div class="method">
+        {recipe.data.method && (
+          <>
+            <h2>Способ приготовления</h2>
+            <p>{recipe.data.method}</p>
+          </>
+        )}
+        <div class="prose" style="width:100%;margin:0;">
+          <Content />
+        </div>
+      </div>
+    </div>
+
+    {recipe.data.tags && recipe.data.tags.length > 0 && (
+      <div class="tags" style="width:min(900px,100%);margin:40px auto 0;">
+        {recipe.data.tags.map(tag => <span class="tag">{tag}</span>)}
+      </div>
+    )}
+
+  </article>
+</MainLayout>

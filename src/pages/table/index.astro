@@ -1,0 +1,40 @@
+---
+import { getCollection } from 'astro:content';
+import MainLayout from '../../layouts/MainLayout.astro';
+
+const recipes = (await getCollection('table'))
+  .filter(r => r.data.language === 'ru')
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+
+<MainLayout title="Стол">
+  <div class="page-hero">
+    <span class="meta">Раздел</span>
+    <h1>Стол</h1>
+    <p class="page-hero-lead">
+      Еда как место, где простые вещи держат семью и память.
+    </p>
+  </div>
+
+  <div class="list-grid">
+    {recipes.map(recipe => (
+      <article class="list-card">
+        <a href={`/table/${recipe.id}`}>
+          <div class="list-card-img">
+            <img
+              src={recipe.data.heroImage ?? '/uploads/kaighi-hero.png'}
+              alt={recipe.data.title}
+            />
+          </div>
+        </a>
+        <span class="meta">{fmt(recipe.data.date)}</span>
+        <h2><a href={`/table/${recipe.id}`}>{recipe.data.title}</a></h2>
+        {recipe.data.shortMemory && <p>{recipe.data.shortMemory}</p>}
+        <a class="button-link" href={`/table/${recipe.id}`}>Сесть за стол</a>
+      </article>
+    ))}
+  </div>
+</MainLayout>

@@ -1,0 +1,68 @@
+---
+import { getCollection } from 'astro:content';
+import MainLayout from '../layouts/MainLayout.astro';
+
+const entries = (await getCollection('guestbook'))
+  .filter(e => e.data.language === 'ru')
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+
+<MainLayout title="Контакты">
+  <div class="page-hero">
+    <h1>Контакты</h1>
+    <p class="page-hero-lead">
+      Напишите нам, поделитесь историей или оставьте след в гостевой.
+    </p>
+  </div>
+
+  <!-- Форма связи -->
+  <section style="padding: 0 0 72px; border-top: 2px solid var(--line); padding-top: 52px;">
+    <form class="contact-grid" onsubmit="return false">
+      <div class="contact-left">
+        <p class="contact-intro">Есть вопросы или предложения? Напишите нам.</p>
+
+        <div class="form-field">
+          <label class="form-label" for="gb-name">Имя</label>
+          <input class="form-input" id="gb-name" type="text" name="name" autocomplete="name" />
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="gb-email">Почта</label>
+          <input class="form-input" id="gb-email" type="email" name="email" autocomplete="email" />
+        </div>
+
+        <button class="form-submit" type="submit">Отправить</button>
+      </div>
+
+      <div class="form-field">
+        <label class="form-label" for="gb-message">Сообщение</label>
+        <textarea class="form-textarea" id="gb-message" name="message" rows="8"></textarea>
+      </div>
+    </form>
+  </section>
+
+  <!-- Гостевая книга -->
+  {entries.length > 0 && (
+    <section aria-labelledby="guestbook-title" style="padding: 54px 0;">
+      <div class="section-head">
+        <p class="section-kicker">Гостевая книга</p>
+        <h2 id="guestbook-title" class="section-title">Отклики</h2>
+      </div>
+      <div class="guestbook-list">
+        {entries.map(entry => (
+          <div class="guestbook-note">
+            <p class="meta">
+              {entry.data.name}
+              {entry.data.location && ` · ${entry.data.location}`}
+              {` · ${fmt(entry.data.date)}`}
+            </p>
+            <blockquote set:html={entry.body} />
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+</MainLayout>

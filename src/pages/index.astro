@@ -2,92 +2,147 @@
 import { getCollection } from 'astro:content';
 import MainLayout from '../layouts/MainLayout.astro';
 
-const voices = await getCollection('voices', ({ data }) => data.language === 'ru');
-const stories = await getCollection('stories', ({ data }) => data.language === 'ru');
-const table = await getCollection('table', ({ data }) => data.language === 'ru');
+const allStories = (await getCollection('stories'))
+  .filter(s => s.data.language === 'ru')
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
-const latestVoice = voices.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())[0];
-const latestStory = stories.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())[0];
-const latestRecipe = table.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())[0];
+const allVoices = (await getCollection('voices'))
+  .filter(v => v.data.language === 'ru')
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const allRecipes = (await getCollection('table'))
+  .filter(r => r.data.language === 'ru')
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const heroStories = allStories.slice(0, 4);
+const featuredStory = allStories[0];
+const gridStories = allStories.slice(0, 3);
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
 ---
 
-<MainLayout title="Главная" lang="ru">
-  <section class="home-hero" data-editable="source" data-path="/src/pages/index.astro" data-key="hero">
-    <p class="kicker home-kicker">общественная яранга в Наукане</p>
-    <h1 class="home-title">КАИГИ</h1>
+<MainLayout title="Главная">
 
-    <div class="home-grid">
-      <h2 class="home-statement">Голоса, истории и память</h2>
+  <!-- ── Hero ─────────────────────────────────────────────── -->
+  <section class="home-hero" aria-label="Главное">
+    <div class="hero-grid">
 
-      <div class="home-text">
+      <!-- Большое фото слева -->
+      <div class="hero-main">
+        <img
+          src={featuredStory?.data.heroImage ?? '/uploads/kaighi-hero.png'}
+          alt={featuredStory?.data.title ?? 'Каиги'}
+        />
+      </div>
+
+      <!-- Стек статей справа -->
+      <div class="hero-stack">
+        {heroStories.map(story => (
+          <a class="hero-card" href={`/stories/${story.id}`}>
+            <div class="hero-card-thumb">
+              <img
+                src={story.data.heroImage ?? '/uploads/kaighi-hero.png'}
+                alt={story.data.title}
+              />
+            </div>
+            <div class="hero-card-body">
+              <span class="meta">{fmt(story.data.date)}</span>
+              <h3>{story.data.title}</h3>
+            </div>
+          </a>
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── О Каиги ───────────────────────────────────────────── -->
+  <section class="about-section" aria-labelledby="about-title">
+    <div class="about-grid">
+      <div class="about-left">
+        <span class="meta">{fmt(featuredStory?.data.date ?? new Date())}</span>
+        <h2 id="about-title">О Каиги</h2>
+      </div>
+      <div class="about-text">
         <p>
-          Kaighi — цифровая яранга для рассказов, голосов, еды и семейной памяти.
+          <strong>Kaighi</strong> (нувукахми, «каиги» — общественная яранга)&thinsp;—
+          заброшенный эскимосский посёлок на мысе Дежнёва.
         </p>
         <p>
-          В Наукане Каиги был большой общинной ярангой: местом, где люди собирались,
-          говорили, слушали, делились едой, новостями, памятью и историями.
-          Сегодня цифровой Kaighi продолжает эту форму онлайн.
+          До 1958 года являлся самым восточным поселением Евразии, но затем
+          уступил это звание Узлену. Ныне в качестве урочища входит в российскую
+          часть природно-этнического парка «Берингия» (участок «Узлен»).
         </p>
       </div>
     </div>
   </section>
 
-  <section class="section feature" aria-labelledby="feature-title">
-    <div class="feature-image">
-      <img src={latestVoice?.data.coverImage ?? '/uploads/kaighi-hero.png'} alt="Kaighi" />
-    </div>
-
-    <div>
-      <p class="section-kicker">Последний голос</p>
-      <h2 id="feature-title" class="feature-title"><a href={latestVoice ? `/voices/${latestVoice.id}` : '/voices'}>{latestVoice?.data.title ?? 'Первый голос'}</a></h2>
-      <p class="section-intro">{latestVoice?.data.shortDescription ?? 'Подкасты, разговоры и записи, в которых память звучит голосом.'}</p>
-      <a class="button-link" href={latestVoice ? `/voices/${latestVoice.id}` : '/voices'}>Открыть выпуск</a>
-    </div>
-  </section>
-
-  <section class="section" aria-labelledby="entrances-title">
+  <!-- ── Истории и рассказы ─────────────────────────────────── -->
+  <section class="section" aria-labelledby="stories-title">
     <div class="section-head">
-      <div>
-        <p class="section-kicker">Истории и рассказы</p>
-        <h2 id="entrances-title" class="section-title">Голоса, рассказы и стол</h2>
-      </div>
+      <p class="section-kicker">Истории и рассказы</p>
+      <h2 id="stories-title" class="section-title">Голоса, рассказы и стол</h2>
     </div>
 
     <div class="entry-grid">
-      <article class="entry-card">
-        <p class="card-kicker">Голоса</p>
-        <h3><a href={latestVoice ? `/voices/${latestVoice.id}` : '/voices'}>{latestVoice?.data.title ?? 'Первый голос'}</a></h3>
-        <p>{latestVoice?.data.shortDescription ?? 'Подкасты, разговоры и записи, в которых память звучит голосом.'}</p>
-        <a class="button-link" href="/voices">Слушать</a>
-      </article>
-
-      <article class="entry-card">
-        <p class="card-kicker">Истории</p>
-        <h3><a href={latestStory ? `/stories/${latestStory.id}` : '/stories'}>{latestStory?.data.title ?? 'Первая история'}</a></h3>
-        <p>{latestStory?.data.intro ?? 'Рассказы о доме, дороге, языке, женщинах, смехе и памяти.'}</p>
-        <a class="button-link" href="/stories">Читать</a>
-      </article>
-
-      <article class="entry-card">
-        <p class="card-kicker">Стол</p>
-        <h3><a href={latestRecipe ? `/table/${latestRecipe.id}` : '/table'}>{latestRecipe?.data.title ?? 'Рецепты памяти'}</a></h3>
-        <p>{latestRecipe?.data.shortMemory ?? 'Еда как место, где простые вещи держат семью и память.'}</p>
-        <a class="button-link" href="/table">Сесть за стол</a>
-      </article>
+      {gridStories.map(story => (
+        <article class="entry-card">
+          <a href={`/stories/${story.id}`}>
+            <div class="entry-card-img">
+              <img
+                src={story.data.heroImage ?? '/uploads/kaighi-hero.png'}
+                alt={story.data.title}
+              />
+            </div>
+          </a>
+          <span class="meta">{fmt(story.data.date)}</span>
+          <h3><a href={`/stories/${story.id}`}>{story.data.title}</a></h3>
+          {story.data.intro && <p>{story.data.intro}</p>}
+          <a class="button-link" href={`/stories/${story.id}`}>Читать</a>
+        </article>
+      ))}
     </div>
   </section>
 
-  <section class="band" data-editable="source" data-path="/src/pages/index.astro" data-key="closing">
+  <!-- ── Схема Каиги ────────────────────────────────────────── -->
+  <section class="band" aria-labelledby="schema-title">
     <div>
       <p class="section-kicker">Схема</p>
-      <h2>Каиги</h2>
+      <h2 id="schema-title">Каиги</h2>
     </div>
     <div>
       <p>
-        Kaighi можно читать как архив, слушать как подкаст, открывать как семейную книгу
-        и пополнять как место, куда возвращаются имена, рецепты и слова.
+        Kaighi можно читать как архив, слушать как подкаст, открывать как
+        семейную книгу и пополнять как место, куда возвращаются имена,
+        рецепты и слова.
       </p>
       <a class="button-link" href="/guestbook">Оставить след в гостевой</a>
     </div>
   </section>
+
+  <!-- ── Форма связи ─────────────────────────────────────────── -->
+  <section class="contact-grid" aria-labelledby="contact-title">
+    <div class="contact-left">
+      <p class="contact-intro">Есть вопросы или предложения? Напишите автору сайта, используя эту форму.</p>
+
+      <div class="form-field">
+        <label class="form-label" for="contact-name">Имя</label>
+        <input class="form-input" id="contact-name" type="text" name="name" autocomplete="name" />
+      </div>
+
+      <div class="form-field">
+        <label class="form-label" for="contact-email">Почта</label>
+        <input class="form-input" id="contact-email" type="email" name="email" autocomplete="email" />
+      </div>
+
+      <button class="form-submit" type="submit">Отправить</button>
+    </div>
+
+    <div class="form-field">
+      <label class="form-label" for="contact-message">Сообщение</label>
+      <textarea class="form-textarea" id="contact-message" name="message" rows="8"></textarea>
+    </div>
+  </section>
+
 </MainLayout>

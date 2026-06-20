@@ -1,0 +1,34 @@
+---
+import { getCollection } from 'astro:content';
+import NightLayout from '../../layouts/NightLayout.astro';
+
+const tales = (await getCollection('night'))
+  .filter(t => t.data.language === 'ru')
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+
+<NightLayout title="Предания ночи">
+
+  <div class="night-hero">
+    <span class="section-kicker">Раздел</span>
+    <h1>Предания<br />ночи</h1>
+    <p class="night-lead">
+      Мифы, легенды и ночные истории нувукахми. То, что рассказывали
+      при свете жировой лампы, когда снаружи был мороз и темнота.
+    </p>
+  </div>
+
+  <div class="night-grid">
+    {tales.map(tale => (
+      <a class="night-card" href={`/night/${tale.id}`}>
+        <span class="meta">{fmt(tale.data.date)}</span>
+        <h2>{tale.data.title}</h2>
+        {tale.data.intro && <p>{tale.data.intro}</p>}
+      </a>
+    ))}
+  </div>
+
+</NightLayout>

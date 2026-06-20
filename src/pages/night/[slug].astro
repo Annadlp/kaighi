@@ -1,0 +1,59 @@
+---
+import { getCollection, render } from 'astro:content';
+import NightLayout from '../../layouts/NightLayout.astro';
+
+export async function getStaticPaths() {
+  const tales = await getCollection('night');
+  return tales.map(tale => ({ params: { slug: tale.id }, props: { tale } }));
+}
+
+const { tale } = Astro.props;
+const { Content } = await render(tale);
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+
+<NightLayout title={tale.data.title} description={tale.data.intro}>
+  <article class="night-article">
+
+    <header class="night-article-header">
+      <span class="meta">{fmt(tale.data.date)}</span>
+      <h1>{tale.data.title}</h1>
+      {tale.data.intro && (
+        <p class="night-article-lead">{tale.data.intro}</p>
+      )}
+    </header>
+
+    {tale.data.heroImage && (
+      <div style="margin-bottom:54px;">
+        <img
+          src={tale.data.heroImage}
+          alt={tale.data.title}
+          style="width:100%;filter:brightness(.7) contrast(1.1);"
+        />
+      </div>
+    )}
+
+    <div class="night-prose">
+      <Content />
+    </div>
+
+    {tale.data.tags && tale.data.tags.length > 0 && (
+      <div class="tags" style="margin-top:48px;">
+        {tale.data.tags.map(tag => (
+          <span class="tag" style="border-color:rgba(199,173,120,.5);color:var(--night-gold);">
+            {tag}
+          </span>
+        ))}
+      </div>
+    )}
+
+    <div style="margin-top:60px;padding-top:30px;border-top:1px solid var(--night-line);">
+      <a href="/night" style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--night-gold);">
+        ← Все предания
+      </a>
+    </div>
+
+  </article>
+</NightLayout>

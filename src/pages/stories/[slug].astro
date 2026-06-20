@@ -1,0 +1,68 @@
+---
+import { getCollection, render } from 'astro:content';
+import MainLayout from '../../layouts/MainLayout.astro';
+
+export async function getStaticPaths() {
+  const stories = await getCollection('stories');
+  return stories.map(story => ({ params: { slug: story.id }, props: { story } }));
+}
+
+const { story } = Astro.props;
+const { Content } = await render(story);
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
+
+const pullQuotes = story.data.pullQuotes ?? [];
+---
+
+<MainLayout title={story.data.title} description={story.data.intro}>
+  <article class="article">
+
+    <header class="article-header">
+      <!-- Социальные иконки -->
+      <div class="article-socials">
+        <a href="#" aria-label="Facebook">f</a>
+        <a href="#" aria-label="Instagram">◎</a>
+        <a href="#" aria-label="Twitter">𝕏</a>
+        <a href="#" aria-label="LinkedIn">in</a>
+      </div>
+
+      <span class="meta">{fmt(story.data.date)}</span>
+      <h1>{story.data.title}</h1>
+      {story.data.intro && <p class="article-lead">{story.data.intro}</p>}
+    </header>
+
+    {story.data.heroImage && (
+      <div class="article-hero-img">
+        <img src={story.data.heroImage} alt={story.data.title} />
+      </div>
+    )}
+
+    <!-- Инлайн-цитата (sidebar style) -->
+    {pullQuotes[0] && (
+      <aside class="inline-quote">
+        „{pullQuotes[0]}"
+        <span class="inline-quote-tweet">
+          <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent('"' + pullQuotes[0] + '" — Kaighi')}`} target="_blank" rel="noopener">Твитнуть</a>
+        </span>
+      </aside>
+    )}
+
+    <div class="prose">
+      <Content />
+    </div>
+
+    <!-- Большая центральная цитата -->
+    {pullQuotes[1] && (
+      <blockquote class="pullquote">{pullQuotes[1]}</blockquote>
+    )}
+
+    {story.data.tags && story.data.tags.length > 0 && (
+      <div class="tags" style="width:min(700px,100%);margin:40px auto 0;">
+        {story.data.tags.map(tag => <span class="tag">{tag}</span>)}
+      </div>
+    )}
+
+  </article>
+</MainLayout>

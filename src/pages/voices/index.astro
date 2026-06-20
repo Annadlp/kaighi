@@ -1,0 +1,41 @@
+---
+import { getCollection } from 'astro:content';
+import MainLayout from '../../layouts/MainLayout.astro';
+
+const voices = (await getCollection('voices'))
+  .filter(v => v.data.language === 'ru')
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+
+<MainLayout title="Голоса">
+  <div class="page-hero">
+    <span class="meta">Раздел</span>
+    <h1>Голоса</h1>
+    <p class="page-hero-lead">
+      Подкасты, разговоры и записи, в которых память звучит голосом.
+    </p>
+  </div>
+
+  <div class="list-grid">
+    {voices.map(voice => (
+      <article class="list-card">
+        <a href={`/voices/${voice.id}`}>
+          <div class="list-card-img">
+            <img
+              src={voice.data.coverImage ?? '/uploads/kaighi-hero.png'}
+              alt={voice.data.title}
+            />
+          </div>
+        </a>
+        <span class="meta">{fmt(voice.data.date)}</span>
+        <h2><a href={`/voices/${voice.id}`}>{voice.data.title}</a></h2>
+        {voice.data.guestName && <p class="meta" style="color:var(--muted);">{voice.data.guestName}</p>}
+        {voice.data.shortDescription && <p>{voice.data.shortDescription}</p>}
+        <a class="button-link" href={`/voices/${voice.id}`}>Слушать</a>
+      </article>
+    ))}
+  </div>
+</MainLayout>

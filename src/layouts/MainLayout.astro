@@ -20,12 +20,12 @@ const isActive = (href: string) => {
 };
 
 const nav = [
-  { href: '/about', label: 'О Каиги' },
-  { href: '/voices', label: 'Голоса' },
-  { href: '/stories', label: 'Истории' },
-  { href: '/table', label: 'Стол' },
-  { href: '/night', label: 'Предания ночи' },
-  { href: '/guestbook', label: 'Контакты' },
+  { href: '/about',    label: 'О Каиги' },
+  { href: '/voices',   label: 'Голоса' },
+  { href: '/stories',  label: 'Истории' },
+  { href: '/table',    label: 'Стол' },
+  { href: '/night',    label: 'Предания ночи' },
+  { href: '/guestbook',label: 'Контакты' },
 ];
 ---
 
@@ -38,9 +38,10 @@ const nav = [
     <title>{title} | Kaighi</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,700;1,400&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet" />
   </head>
   <body class="day-shell">
+
     <header class="site-header">
       <nav class="site-nav" aria-label="Главная навигация">
         {nav.map((item) => (
@@ -49,7 +50,8 @@ const nav = [
           </a>
         ))}
       </nav>
-      <a class="site-logo" href="/" aria-label="Kaighi home">КАИГИ</a>
+
+      <a class="site-logo" href="/" aria-label="Kaighi — на главную">КАИГИ</a>
       <p class="site-subtitle">общественная яранга на краю земли</p>
     </header>
 
@@ -62,24 +64,33 @@ const nav = [
         <div class="footer-mark">◌◌◌</div>
         <p>© {new Date().getFullYear()} Kaighi.</p>
         <p>Копирование любых материалов сайта возможно только с разрешения правообладателя.</p>
+        <p><a href="/about">Политика конфиденциальности</a></p>
       </div>
+
       <div>
         <h2>Разделы</h2>
+        <a href="/about">О Каиги</a>
         <a href="/voices">Голоса</a>
         <a href="/stories">Истории</a>
         <a href="/table">Стол</a>
+        <a href="/night">Предания ночи</a>
         <a href="/guestbook">Контакты</a>
       </div>
+
       <div>
         <h2>Подписка</h2>
-        <form class="subscribe-form">
-          <input aria-label="Email" />
-          <button type="button">Подписаться</button>
+        <form class="subscribe-form" onsubmit="return false">
+          <input type="email" aria-label="Email для подписки" placeholder="ваш@email.ru" />
+          <button type="submit">Подписаться</button>
         </form>
-        <div class="socials" aria-label="Социальные ссылки">
-          <span>f</span><span>◎</span><span>𝕏</span><span>in</span>
+        <div class="socials" aria-label="Социальные сети">
+          <a href="#" aria-label="Facebook">f</a>
+          <a href="#" aria-label="Instagram">◎</a>
+          <a href="#" aria-label="Twitter / X">𝕏</a>
+          <a href="#" aria-label="LinkedIn">in</a>
         </div>
       </div>
     </footer>
+
   </body>
 </html>

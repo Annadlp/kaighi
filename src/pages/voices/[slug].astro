@@ -1,0 +1,56 @@
+---
+import { getCollection, render } from 'astro:content';
+import MainLayout from '../../layouts/MainLayout.astro';
+import AudioPlayer from '../../components/AudioPlayer.astro';
+
+export async function getStaticPaths() {
+  const voices = await getCollection('voices');
+  return voices.map(voice => ({ params: { slug: voice.id }, props: { voice } }));
+}
+
+const { voice } = Astro.props;
+const { Content } = await render(voice);
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+
+<MainLayout title={voice.data.title} description={voice.data.shortDescription}>
+  <article class="article">
+
+    <header class="article-header">
+      <div class="article-socials">
+        <a href="#" aria-label="Facebook">f</a>
+        <a href="#" aria-label="Instagram">◎</a>
+        <a href="#" aria-label="Twitter">𝕏</a>
+        <a href="#" aria-label="LinkedIn">in</a>
+      </div>
+
+      <span class="meta">{fmt(voice.data.date)}</span>
+      <h1>{voice.data.title}</h1>
+      {voice.data.guestName && (
+        <p class="meta" style="font-size:14px;margin-top:8px;">{voice.data.guestName}</p>
+      )}
+      {voice.data.shortDescription && (
+        <p class="article-lead">{voice.data.shortDescription}</p>
+      )}
+    </header>
+
+    {voice.data.heroQuote && (
+      <blockquote class="pullquote">{voice.data.heroQuote}</blockquote>
+    )}
+
+    <AudioPlayer embedUrl={voice.data.audioEmbedUrl} title={voice.data.title} />
+
+    <div class="prose">
+      <Content />
+    </div>
+
+    {voice.data.tags && voice.data.tags.length > 0 && (
+      <div class="tags" style="width:min(700px,100%);margin:40px auto 0;">
+        {voice.data.tags.map(tag => <span class="tag">{tag}</span>)}
+      </div>
+    )}
+
+  </article>
+</MainLayout>
