@@ -44,10 +44,10 @@ body.day-shell { position: relative; overflow-x: hidden; }
 body.day-shell::before {
   content: "";
   position: fixed;
-  top: 150px;
-  left: -120px;
-  width: min(720px, 48vw);
-  height: min(720px, 48vw);
+  top: 170px;
+  left: -150px;
+  width: min(760px, 50vw);
+  height: min(760px, 50vw);
   background: url("/images/kaighi-wing.svg") no-repeat center / contain;
   opacity: 0.16;
   pointer-events: none;
@@ -90,18 +90,20 @@ body.day-shell::before {
 .nav-link[aria-current="page"] { color: var(--gold-dark); }
 
 .site-logo {
-  display: block;
-  width: 100%;
-  font-family: var(--font-sans);
-  font-weight: 700;
-  text-transform: uppercase;
-  white-space: nowrap;
-  letter-spacing: 0.025em;
-  font-size: clamp(120px, 18vw, 268px);
-  line-height: 0.76;
-  transform: none;
-  transform-origin: center center;
-}
+    display: block;
+    width: 100%;
+    margin: 0;
+    text-align: left;
+    font-family: var(--font-sans);
+    font-weight: 700;
+    text-transform: uppercase;
+    white-space: nowrap;
+    letter-spacing: 0.045em;
+    font-size: clamp(130px, 18vw, 285px);
+    line-height: 0.76;
+    transform: none;
+    transform-origin: left center;
+  }
 
 .site-subtitle {
   margin: 36px 0 0 auto;
