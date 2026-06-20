@@ -931,8 +931,12 @@ body:has(.night-shell) {
 /* FIX: align header to KAIGHI */
 
 .site-nav {
-  justify-content: flex-start;
-  margin-bottom: 64px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: clamp(22px, 3vw, 42px);
+  margin-bottom: 76px;
+  flex-wrap: wrap;
 }
 
 .site-logo {
