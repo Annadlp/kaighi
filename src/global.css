@@ -41,18 +41,6 @@ h1,h2,h3,h4 { margin: 0; }
 
 /* ─── Day shell: wing watermark ─────────────────────────────── */
 body.day-shell { position: relative; overflow-x: hidden; }
-body.day-shell::before {
-  content: "";
-  position: fixed;
-  top: 110px;
-  left: -150px;
-  width: min(760px, 50vw);
-  height: min(760px, 50vw);
-  background: url("/images/kaighi-wing.svg") no-repeat center / contain;
-  opacity: 0.16;
-  pointer-events: none;
-  z-index: 5;
-}
 
 /* ─── Shared layout wrappers ─────────────────────────────────── */
 .site-header,
@@ -68,7 +56,30 @@ body.day-shell::before {
 }
 
 /* ─── Header ─────────────────────────────────────────────────── */
-.site-header { padding: 50px 0 110; }
+.site-header {
+  position: relative;
+  z-index: 10;
+  padding: 50px 0 110px;
+}
+
+.site-header::before {
+  content: "";
+  position: absolute;
+  top: 105px;
+  left: -390px;
+  width: 560px;
+  height: 560px;
+  background: url("/images/kaighi-wing.svg") no-repeat center / contain;
+  opacity: 0.16;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.site-nav,
+.site-logo {
+  position: relative;
+  z-index: 2;
+}
 
 .site-nav {
   display: flex;
@@ -931,22 +942,3 @@ body:has(.night-shell) {
   }
 }
 
-/* FIX: align header to KAIGHI */
-
-.site-nav {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: clamp(22px, 3vw, 42px);
-  margin-bottom: 76px;
-  flex-wrap: wrap;
-}
-
-.site-logo {
-  transform: none;
-  transform-origin: left center;
-}
-
-.site-subtitle {
-  display: none;
-}
