@@ -12,7 +12,7 @@
   --gold: #c7ad78;
   --gold-dark: #9b722d;
   --soft: #f6f2e8;
-  --max: 840px;
+  --max: 860px;
   --gutter: clamp(24px, 7vw, 86px);
 }
 
