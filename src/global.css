@@ -96,7 +96,7 @@ body.day-shell::before {
   font-weight: 700;
   text-transform: uppercase;
   white-space: nowrap;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.02em;
   font-size: clamp(120px, 18vw, 268px);
   line-height: 0.76;
   transform: none;
