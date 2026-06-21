@@ -6,7 +6,7 @@ guestName: "Нина Энмынкау"
 shortDescription: "В первом эпизоде Айвана Энмынкау разговаривает со своей мамой Ниной Энмынкау о её работе на радио."
 heroQuote: "Мне хотелось помочь своим землякам, помочь словом."
 coverImage: "/uploads/mom.png"
-audioEmbedUrl: ""
+audioEmbedUrl: "<iframe src="https://www.buzzsprout.com/2621862/episodes/19279591-1?client_source=small_player&iframe=true" loading="lazy" width="100%" height="200" frameborder="0" scrolling="no" title='Why Indigenous Women Love. And Laugh., Эпизод 1. Помочь словом: радио, язык и память'></iframe>"
 tags:
   - радио
   - язык
