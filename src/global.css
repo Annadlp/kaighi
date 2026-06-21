@@ -1144,3 +1144,15 @@ body:has(.night-shell) { background: var(--nb); }
   display: block;
   margin-top: 36px;
 }
+
+.map-credit {
+  max-width: 800px;
+  margin: 2rem 0 1.5rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--color-muted);
+}
+
+.map-credit strong {
+  color: var(--color-ink);
+}
