@@ -5,7 +5,7 @@ language: ru
 guestName: "Нина Энмынкау"
 shortDescription: "В первом эпизоде Айвана Энмынкау разговаривает со своей мамой Ниной Энмынкау о её работе на радио."
 heroQuote: "Мне хотелось помочь своим землякам, помочь словом."
-coverImage: "/uploads/mom.jpg"
+coverImage: "/images/mom.jpg"
 audioEmbedUrl: "https://www.buzzsprout.com/2621862/episodes/19279591-1?client_source=small_player&iframe=true"
 tags:
   - радио
