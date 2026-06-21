@@ -1137,3 +1137,10 @@ body:has(.night-shell) { background: var(--nb); }
   .episode-guest-card { grid-template-columns: 1fr; }
   .episode-guest-card img { width: 64px; height: 64px; }
 }
+
+.naukan-map {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-top: 36px;
+}
