@@ -14,10 +14,14 @@ export const collections = {
       ...base,
       guestName: z.string().optional(),
       guestBio: z.string().optional(),
-      audioEmbedUrl: z.string().optional(),
+      audioEmbedUrl: z.string().optional(),       // fallback: iframe src URL
+      buzzsproutPodcastId: z.string().optional(), // e.g. "1234567"
+      buzzsproutEpisodeId: z.string().optional(), // e.g. "98765432"
       shortDescription: z.string().optional(),
       heroQuote: z.string().optional(),
       coverImage: z.string().optional(),
+      episodeNumber: z.number().optional(),
+      duration: z.string().optional(),            // e.g. "42 мин"
       keyQuotes: z.array(z.string()).optional(),
       tags: z.array(z.string()).optional(),
       guestbookPrompt: z.string().optional(),

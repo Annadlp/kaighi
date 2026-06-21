@@ -11,29 +11,27 @@ const fmt = (d: Date) =>
 ---
 
 <MainLayout title="Истории">
-  <div class="page-hero">
+  <div class="page-header">
     <span class="meta">Раздел</span>
     <h1>Истории</h1>
-    <p class="page-hero-lead">
-      Рассказы о доме, дороге, языке, женщинах, смехе и памяти.
-    </p>
+    <p>Рассказы о доме, дороге, языке, женщинах, смехе и памяти.</p>
   </div>
 
-  <div class="list-grid">
-    {stories.map(story => (
-      <article class="list-card">
-        <a href={`/stories/${story.id}`}>
-          <div class="list-card-img">
+  <div class="card-grid">
+    {stories.map(s => (
+      <article class="media-card">
+        <a href={`/stories/${s.id}`}>
+          <div class="media-card-img">
             <img
-              src={story.data.heroImage ?? '/uploads/kaighi-hero.png'}
-              alt={story.data.title}
+              src={s.data.heroImage ?? '/uploads/kaighi-hero.png'}
+              alt={s.data.title}
             />
           </div>
         </a>
-        <span class="meta">{fmt(story.data.date)}</span>
-        <h2><a href={`/stories/${story.id}`}>{story.data.title}</a></h2>
-        {story.data.intro && <p>{story.data.intro}</p>}
-        <a class="button-link" href={`/stories/${story.id}`}>Читать</a>
+        <span class="meta">{fmt(s.data.date)}</span>
+        <h2><a href={`/stories/${s.id}`}>{s.data.title}</a></h2>
+        {s.data.intro && <p>{s.data.intro}</p>}
+        <a class="read-link" href={`/stories/${s.id}`}>Читать →</a>
       </article>
     ))}
   </div>

@@ -11,55 +11,46 @@ const fmt = (d: Date) =>
 ---
 
 <MainLayout title="Контакты">
-  <div class="page-hero">
+  <div class="page-header">
     <h1>Контакты</h1>
-    <p class="page-hero-lead">
-      Напишите нам, поделитесь историей или оставьте след в гостевой.
-    </p>
+    <p>Напишите нам или оставьте след в гостевой книге.</p>
   </div>
 
-  <!-- Форма связи -->
-  <section style="padding: 0 0 72px; border-top: 2px solid var(--line); padding-top: 52px;">
-    <form class="contact-grid" onsubmit="return false">
+  <section class="contact-section" style="margin-top: 0; border-top: none; padding-top: 0;">
+    <p class="contact-intro">
+      Есть вопросы или предложения? Напишите, используя эту форму.
+    </p>
+    <form class="contact-form" onsubmit="return false">
       <div class="contact-left">
-        <p class="contact-intro">Есть вопросы или предложения? Напишите нам.</p>
-
-        <div class="form-field">
-          <label class="form-label" for="gb-name">Имя</label>
-          <input class="form-input" id="gb-name" type="text" name="name" autocomplete="name" />
-        </div>
-
-        <div class="form-field">
-          <label class="form-label" for="gb-email">Почта</label>
-          <input class="form-input" id="gb-email" type="email" name="email" autocomplete="email" />
-        </div>
-
-        <button class="form-submit" type="submit">Отправить</button>
+        <label>
+          <span>Имя</span>
+          <input name="name" type="text" autocomplete="name" />
+        </label>
+        <label>
+          <span>Почта</span>
+          <input name="email" type="email" autocomplete="email" />
+        </label>
+        <button type="button">Отправить</button>
       </div>
-
-      <div class="form-field">
-        <label class="form-label" for="gb-message">Сообщение</label>
-        <textarea class="form-textarea" id="gb-message" name="message" rows="8"></textarea>
-      </div>
+      <label class="message-field">
+        <span>Сообщение</span>
+        <textarea name="message" rows="5"></textarea>
+      </label>
     </form>
   </section>
 
-  <!-- Гостевая книга -->
   {entries.length > 0 && (
-    <section aria-labelledby="guestbook-title" style="padding: 54px 0;">
-      <div class="section-head">
-        <p class="section-kicker">Гостевая книга</p>
-        <h2 id="guestbook-title" class="section-title">Отклики</h2>
-      </div>
-      <div class="guestbook-list">
-        {entries.map(entry => (
-          <div class="guestbook-note">
-            <p class="meta">
-              {entry.data.name}
-              {entry.data.location && ` · ${entry.data.location}`}
-              {` · ${fmt(entry.data.date)}`}
-            </p>
-            <blockquote set:html={entry.body} />
+    <section style="margin-top: 52px;">
+      <p class="section-kicker">Гостевая книга</p>
+      <div class="guestbook-entries">
+        {entries.map(e => (
+          <div class="guestbook-entry">
+            <span class="meta">
+              {e.data.name}
+              {e.data.location && ` · ${e.data.location}`}
+              {` · ${fmt(e.data.date)}`}
+            </span>
+            <p>{e.body?.trim()}</p>
           </div>
         ))}
       </div>

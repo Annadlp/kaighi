@@ -4,7 +4,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
 
 export async function getStaticPaths() {
   const recipes = await getCollection('table');
-  return recipes.map(recipe => ({ params: { slug: recipe.id }, props: { recipe } }));
+  return recipes.map(r => ({ params: { slug: r.id }, props: { recipe: r } }));
 }
 
 const { recipe } = Astro.props;
@@ -15,7 +15,7 @@ const fmt = (d: Date) =>
 ---
 
 <MainLayout title={recipe.data.title} description={recipe.data.shortMemory}>
-  <article class="article">
+  <div class="article-wrap">
 
     <header class="article-header">
       <span class="meta">{fmt(recipe.data.date)}</span>
@@ -26,39 +26,34 @@ const fmt = (d: Date) =>
     </header>
 
     {recipe.data.heroImage && (
-      <div class="article-hero-img">
+      <div class="article-hero">
         <img src={recipe.data.heroImage} alt={recipe.data.title} />
       </div>
     )}
 
-    <div class="recipe-layout" style="width:min(900px,100%);margin:0 auto;">
+    <div class="recipe-detail">
       {recipe.data.ingredients && recipe.data.ingredients.length > 0 && (
         <aside class="ingredients">
-          <h2>Ингредиенты</h2>
+          <span class="ingredients-title">Ингредиенты</span>
           <ul>
-            {recipe.data.ingredients.map(ing => <li>{ing}</li>)}
+            {recipe.data.ingredients.map(i => <li>{i}</li>)}
           </ul>
         </aside>
       )}
 
-      <div class="method">
+      <div class="prose">
         {recipe.data.method && (
-          <>
-            <h2>Способ приготовления</h2>
-            <p>{recipe.data.method}</p>
-          </>
+          <p><strong>Способ приготовления:</strong> {recipe.data.method}</p>
         )}
-        <div class="prose" style="width:100%;margin:0;">
-          <Content />
-        </div>
+        <Content />
       </div>
     </div>
 
     {recipe.data.tags && recipe.data.tags.length > 0 && (
-      <div class="tags" style="width:min(900px,100%);margin:40px auto 0;">
-        {recipe.data.tags.map(tag => <span class="tag">{tag}</span>)}
+      <div class="article-tags">
+        {recipe.data.tags.map(t => <span class="tag">{t}</span>)}
       </div>
     )}
 
-  </article>
+  </div>
 </MainLayout>

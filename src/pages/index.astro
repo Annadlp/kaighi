@@ -2,27 +2,26 @@
 import MainLayout from '../layouts/MainLayout.astro';
 
 const sideItems = [
-  { title: 'Наукан и море', image: '/uploads/kaighi-hero.png' },
-  { title: 'Наукан — граница двух миров', image: '/uploads/kaighi-hero.png' },
-  { title: 'Память о доме', image: '/uploads/mom.png' },
-  { title: 'Голоса с края земли', image: '/uploads/kaighi-hero.png' },
+  { title: 'Наукан и море',               image: '/uploads/kaighi-hero.png', href: '/stories/naukan-i-more' },
+  { title: 'Наукан — граница двух миров', image: '/uploads/kaighi-hero.png', href: '/stories/granitsa-dvukh-mirov' },
+  { title: 'Память о доме',               image: '/uploads/mom.png',          href: '/stories/pamyat-o-dome' },
 ];
 
 const storyItems = [
-  { title: 'Наукан — граница двух миров', image: '/uploads/kaighi-hero.png' },
-  { title: 'Наукан и море', image: '/uploads/kaighi-hero.png' },
-  { title: 'Память о доме', image: '/uploads/mom.png' },
+  { title: 'Наукан — граница двух миров', image: '/uploads/kaighi-hero.png', href: '/stories/granitsa-dvukh-mirov', excerpt: 'Наукан стоял на самом краю Евразии — там, где Чукотка смотрит на Аляску через узкий пролив.' },
+  { title: 'Наукан и море',               image: '/uploads/kaighi-hero.png', href: '/stories/naukan-i-more',        excerpt: 'Вся жизнь моего народа — эскимосов нувукахми — была связана с морем.' },
+  { title: 'Память о доме',               image: '/uploads/mom.png',          href: '/stories/pamyat-o-dome',       excerpt: 'Что значит помнить место, которого больше нет?' },
 ];
 ---
 
-<MainLayout title="Главная" lang="ru">
+<MainLayout title="Главная" isHome={true}>
+
   <section class="hero-shell" aria-label="Kaighi">
     <div class="wing-layer" aria-hidden="true"></div>
 
     <h1 class="site-logo" aria-label="KAIGHI">
       <span>K</span><span>A</span><span>I</span><span>G</span><span>H</span><span>I</span>
     </h1>
-
     <p class="site-subtitle">общественная яранга на краю земли</p>
 
     <div class="hero-grid">
@@ -30,13 +29,19 @@ const storyItems = [
         <img src="/uploads/kaighi-hero.png" alt="Наукан" />
         <p class="meta">28 мая 2022 г.</p>
         <h2>О Каиги</h2>
-        <p><strong>Kaighi</strong> — цифровая общественная яранга для голосов, историй, рецептов и памяти.</p>
-        <p>Здесь можно слушать подкасты, читать рассказы, собирать семейные рецепты и возвращать имена, слова и следы Наукана.</p>
+        <p>
+          <strong>Kaighi</strong> — цифровая общественная яранга для голосов,
+          историй, рецептов и памяти эскимосского народа нувукахми.
+        </p>
+        <p>
+          Здесь можно слушать подкасты, читать рассказы, собирать семейные
+          рецепты и возвращать имена, слова и следы Наукана.
+        </p>
       </article>
 
       <aside class="hero-list" aria-label="Последние материалы">
         {sideItems.map((item) => (
-          <a class="hero-card" href="/stories">
+          <a class="hero-card" href={item.href}>
             <img src={item.image} alt="" />
             <div>
               <p class="meta">28 мая 2022 г.</p>
@@ -48,23 +53,25 @@ const storyItems = [
     </div>
   </section>
 
-  <section class="story-section" aria-labelledby="stories-title">
-    <p class="section-kicker">Истории и рассказы</p>
+  <section class="story-section" aria-labelledby="stories-heading">
+    <p class="section-kicker" id="stories-heading">Истории и рассказы</p>
     <div class="story-grid">
       {storyItems.map((item) => (
         <article class="story-card">
-          <img src={item.image} alt="" />
+          <a href={item.href}>
+            <img src={item.image} alt="" />
+          </a>
           <p class="meta">28 мая 2022 г.</p>
-          <h2>{item.title}</h2>
-          <p><strong>Наукан</strong> — место на краю земли, где память держится в голосах, маршрутах, еде и рассказах.</p>
+          <h2><a href={item.href}>{item.title}</a></h2>
+          <p>{item.excerpt}</p>
         </article>
       ))}
     </div>
   </section>
 
-  <section class="scheme-section" aria-labelledby="scheme-title">
+  <section class="scheme-section" aria-labelledby="scheme-heading">
     <p class="outline-title">Схема</p>
-    <h2 id="scheme-title">Каиги</h2>
+    <h2 id="scheme-heading">Каиги</h2>
     <div class="scheme-map" aria-hidden="true">
       <div class="map-line line-one"></div>
       <div class="map-line line-two"></div>
@@ -73,24 +80,27 @@ const storyItems = [
     </div>
   </section>
 
-  <section class="contact-section" aria-labelledby="contact-title">
-    <p class="contact-intro">Есть вопросы или предложения? Напишите автору сайта, используя эту форму.</p>
-    <form class="contact-form">
+  <section class="contact-section" aria-labelledby="contact-heading">
+    <p class="contact-intro">
+      Есть вопросы или предложения? Напишите автору сайта, используя эту форму.
+    </p>
+    <form class="contact-form" onsubmit="return false">
       <div class="contact-left">
         <label>
           <span>Имя</span>
-          <input name="name" />
+          <input name="name" type="text" autocomplete="name" />
         </label>
         <label>
           <span>Почта</span>
-          <input name="email" />
+          <input name="email" type="email" autocomplete="email" />
         </label>
         <button type="button">Отправить</button>
       </div>
       <label class="message-field">
-        <span id="contact-title">Сообщение</span>
-        <textarea name="message"></textarea>
+        <span id="contact-heading">Сообщение</span>
+        <textarea name="message" rows="5"></textarea>
       </label>
     </form>
   </section>
+
 </MainLayout>

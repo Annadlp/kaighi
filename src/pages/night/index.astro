@@ -11,24 +11,23 @@ const fmt = (d: Date) =>
 ---
 
 <NightLayout title="Предания ночи">
-
   <div class="night-hero">
-    <span class="section-kicker">Раздел</span>
+    <span class="meta">Раздел</span>
     <h1>Предания<br />ночи</h1>
     <p class="night-lead">
-      Мифы, легенды и ночные истории нувукахми. То, что рассказывали
-      при свете жировой лампы, когда снаружи был мороз и темнота.
+      Мифы, легенды и ночные истории нувукахми —
+      то, что рассказывали при свете жировой лампы,
+      когда снаружи был мороз и темнота.
     </p>
   </div>
 
   <div class="night-grid">
-    {tales.map(tale => (
-      <a class="night-card" href={`/night/${tale.id}`}>
-        <span class="meta">{fmt(tale.data.date)}</span>
-        <h2>{tale.data.title}</h2>
-        {tale.data.intro && <p>{tale.data.intro}</p>}
+    {tales.map(t => (
+      <a class="night-card" href={`/night/${t.id}`}>
+        <span class="meta">{fmt(t.data.date)}</span>
+        <h2>{t.data.title}</h2>
+        {t.data.intro && <p>{t.data.intro}</p>}
       </a>
     ))}
   </div>
-
 </NightLayout>

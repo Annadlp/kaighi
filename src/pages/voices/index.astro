@@ -11,30 +11,41 @@ const fmt = (d: Date) =>
 ---
 
 <MainLayout title="Голоса">
-  <div class="page-hero">
+  <div class="page-header">
     <span class="meta">Раздел</span>
     <h1>Голоса</h1>
-    <p class="page-hero-lead">
-      Подкасты, разговоры и записи, в которых память звучит голосом.
-    </p>
+    <p>Подкасты, разговоры и записи — память, которая звучит голосом.</p>
   </div>
 
-  <div class="list-grid">
-    {voices.map(voice => (
-      <article class="list-card">
-        <a href={`/voices/${voice.id}`}>
-          <div class="list-card-img">
-            <img
-              src={voice.data.coverImage ?? '/uploads/kaighi-hero.png'}
-              alt={voice.data.title}
-            />
+  <div class="voice-list">
+    {voices.map((v, i) => (
+      <article class="voice-card">
+        <div class="voice-card-img">
+          <img
+            src={v.data.coverImage ?? '/uploads/kaighi-hero.png'}
+            alt={v.data.title}
+          />
+          {v.data.episodeNumber && (
+            <span class="voice-card-ep">Эп. {v.data.episodeNumber}</span>
+          )}
+        </div>
+
+        <div class="voice-card-body">
+          <span class="meta">{fmt(v.data.date)}</span>
+          <h2><a href={`/voices/${v.id}`}>{v.data.title}</a></h2>
+          {v.data.guestName && (
+            <span class="voice-guest">{v.data.guestName}</span>
+          )}
+          {v.data.shortDescription && (
+            <p>{v.data.shortDescription}</p>
+          )}
+          <div class="voice-card-footer">
+            <a class="read-link" href={`/voices/${v.id}`}>Слушать →</a>
+            {v.data.duration && (
+              <span class="voice-duration">{v.data.duration}</span>
+            )}
           </div>
-        </a>
-        <span class="meta">{fmt(voice.data.date)}</span>
-        <h2><a href={`/voices/${voice.id}`}>{voice.data.title}</a></h2>
-        {voice.data.guestName && <p class="meta" style="color:var(--muted);">{voice.data.guestName}</p>}
-        {voice.data.shortDescription && <p>{voice.data.shortDescription}</p>}
-        <a class="button-link" href={`/voices/${voice.id}`}>Слушать</a>
+        </div>
       </article>
     ))}
   </div>

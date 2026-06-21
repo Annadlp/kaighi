@@ -1,11 +1,10 @@
 ---
 import { getCollection, render } from 'astro:content';
 import MainLayout from '../../layouts/MainLayout.astro';
-import AudioPlayer from '../../components/AudioPlayer.astro';
 
 export async function getStaticPaths() {
   const voices = await getCollection('voices');
-  return voices.map(voice => ({ params: { slug: voice.id }, props: { voice } }));
+  return voices.map(v => ({ params: { slug: v.id }, props: { voice: v } }));
 }
 
 const { voice } = Astro.props;
@@ -13,44 +12,120 @@ const { Content } = await render(voice);
 
 const fmt = (d: Date) =>
   d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
+
+const hasBuzzsprout = voice.data.buzzsproutPodcastId && voice.data.buzzsproutEpisodeId;
+const bsPlayerId = hasBuzzsprout
+  ? `buzzsprout-player-${voice.data.buzzsproutEpisodeId}`
+  : null;
 ---
 
 <MainLayout title={voice.data.title} description={voice.data.shortDescription}>
-  <article class="article">
+  <div class="episode-wrap">
 
-    <header class="article-header">
-      <div class="article-socials">
-        <a href="#" aria-label="Facebook">f</a>
-        <a href="#" aria-label="Instagram">◎</a>
-        <a href="#" aria-label="Twitter">𝕏</a>
-        <a href="#" aria-label="LinkedIn">in</a>
+    {voice.data.coverImage && (
+      <div class="episode-hero">
+        <img src={voice.data.coverImage} alt={voice.data.title} />
+      </div>
+    )}
+
+    <header class="episode-header">
+      <div class="episode-eyebrow">
+        {voice.data.episodeNumber && (
+          <span class="episode-number">Эпизод {voice.data.episodeNumber}</span>
+        )}
+        <span class="meta">{fmt(voice.data.date)}</span>
+        {voice.data.duration && (
+          <span class="episode-duration">{voice.data.duration}</span>
+        )}
       </div>
 
-      <span class="meta">{fmt(voice.data.date)}</span>
       <h1>{voice.data.title}</h1>
+
       {voice.data.guestName && (
-        <p class="meta" style="font-size:14px;margin-top:8px;">{voice.data.guestName}</p>
+        <p class="episode-guest-line">{voice.data.guestName}</p>
       )}
+
       {voice.data.shortDescription && (
-        <p class="article-lead">{voice.data.shortDescription}</p>
+        <p class="episode-lead">{voice.data.shortDescription}</p>
       )}
     </header>
+
+    <!-- Аудиоплеер -->
+    <div class="episode-player">
+      <p class="episode-player-label">Слушать эпизод</p>
+
+      {hasBuzzsprout ? (
+        <>
+          <div id={bsPlayerId}></div>
+          <script
+            is:inline
+            src={`https://www.buzzsprout.com/${voice.data.buzzsproutPodcastId}/${voice.data.buzzsproutEpisodeId}.js?container_id=${bsPlayerId}&player=small`}
+            type="text/javascript"
+            charset="utf-8"
+          ></script>
+        </>
+      ) : voice.data.audioEmbedUrl ? (
+        <iframe
+          src={voice.data.audioEmbedUrl}
+          loading="lazy"
+          width="100%"
+          height="200"
+          frameborder="0"
+          scrolling="no"
+          title={voice.data.title}
+        ></iframe>
+      ) : (
+        <div class="audio-placeholder-lg">
+          Аудио появится здесь
+        </div>
+      )}
+    </div>
 
     {voice.data.heroQuote && (
       <blockquote class="pullquote">{voice.data.heroQuote}</blockquote>
     )}
 
-    <AudioPlayer embedUrl={voice.data.audioEmbedUrl} title={voice.data.title} />
-
-    <div class="prose">
-      <Content />
-    </div>
-
-    {voice.data.tags && voice.data.tags.length > 0 && (
-      <div class="tags" style="width:min(700px,100%);margin:40px auto 0;">
-        {voice.data.tags.map(tag => <span class="tag">{tag}</span>)}
+    <!-- Карточка гостя -->
+    {voice.data.guestName && voice.data.guestBio && (
+      <div class="episode-guest-card">
+        {voice.data.coverImage && (
+          <img src={voice.data.coverImage} alt={voice.data.guestName} />
+        )}
+        <div>
+          <p class="episode-guest-card-name">{voice.data.guestName}</p>
+          <p class="episode-guest-card-bio">{voice.data.guestBio}</p>
+        </div>
       </div>
     )}
 
-  </article>
+    <!-- Ключевые цитаты до основного текста -->
+    {voice.data.keyQuotes && voice.data.keyQuotes.slice(0, 1).map(q => (
+      <blockquote class="episode-key-quote">{q}</blockquote>
+    ))}
+
+    <!-- Основной текст (шоу-ноты) -->
+    <div class="prose" style="padding-top: 28px;">
+      <Content />
+    </div>
+
+    <!-- Остальные цитаты после текста -->
+    {voice.data.keyQuotes && voice.data.keyQuotes.slice(1).map(q => (
+      <blockquote class="episode-key-quote">{q}</blockquote>
+    ))}
+
+    {voice.data.tags && voice.data.tags.length > 0 && (
+      <div class="article-tags">
+        {voice.data.tags.map(t => <span class="tag">{t}</span>)}
+      </div>
+    )}
+
+    {voice.data.guestbookPrompt && (
+      <div style="border-top: 1px solid var(--line); margin-top: 40px; padding-top: 24px;">
+        <p style="font-size: 13px; color: var(--muted); font-style: italic;">
+          {voice.data.guestbookPrompt}
+        </p>
+      </div>
+    )}
+
+  </div>
 </MainLayout>

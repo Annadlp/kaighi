@@ -11,29 +11,27 @@ const fmt = (d: Date) =>
 ---
 
 <MainLayout title="Стол">
-  <div class="page-hero">
+  <div class="page-header">
     <span class="meta">Раздел</span>
     <h1>Стол</h1>
-    <p class="page-hero-lead">
-      Еда как место, где простые вещи держат семью и память.
-    </p>
+    <p>Еда как место, где простые вещи держат семью и память.</p>
   </div>
 
-  <div class="list-grid">
-    {recipes.map(recipe => (
-      <article class="list-card">
-        <a href={`/table/${recipe.id}`}>
-          <div class="list-card-img">
+  <div class="card-grid">
+    {recipes.map(r => (
+      <article class="media-card">
+        <a href={`/table/${r.id}`}>
+          <div class="media-card-img">
             <img
-              src={recipe.data.heroImage ?? '/uploads/kaighi-hero.png'}
-              alt={recipe.data.title}
+              src={r.data.heroImage ?? '/uploads/kaighi-hero.png'}
+              alt={r.data.title}
             />
           </div>
         </a>
-        <span class="meta">{fmt(recipe.data.date)}</span>
-        <h2><a href={`/table/${recipe.id}`}>{recipe.data.title}</a></h2>
-        {recipe.data.shortMemory && <p>{recipe.data.shortMemory}</p>}
-        <a class="button-link" href={`/table/${recipe.id}`}>Сесть за стол</a>
+        <span class="meta">{fmt(r.data.date)}</span>
+        <h2><a href={`/table/${r.id}`}>{r.data.title}</a></h2>
+        {r.data.shortMemory && <p>{r.data.shortMemory}</p>}
+        <a class="read-link" href={`/table/${r.id}`}>Сесть за стол →</a>
       </article>
     ))}
   </div>
