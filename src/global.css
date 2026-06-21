@@ -1156,3 +1156,105 @@ body:has(.night-shell) { background: var(--nb); }
 .map-credit strong {
   color: var(--color-ink);
 }
+
+.voices-page {
+  padding: 72px 0 96px;
+}
+
+.voices-header {
+  max-width: 980px;
+  margin-bottom: 56px;
+}
+
+.voices-header h1 {
+  max-width: 920px;
+  margin-top: 18px;
+  font-size: clamp(48px, 7.4vw, 108px);
+  line-height: 0.92;
+  letter-spacing: -0.06em;
+}
+
+.voices-lead {
+  max-width: 760px;
+  margin-top: 28px;
+  font-size: clamp(22px, 2.4vw, 34px);
+  line-height: 1.18;
+  font-weight: 700;
+}
+
+.voices-intro {
+  max-width: 680px;
+  margin-top: 18px;
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.voice-list {
+  border-top: 1px solid var(--gold);
+}
+
+.voice-card {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 640px);
+  gap: 48px;
+  align-items: start;
+  padding: 42px 0;
+  border-bottom: 1px solid var(--gold);
+}
+
+.voice-card-img img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  filter: grayscale(1);
+}
+
+.voice-card-body {
+  max-width: 640px;
+}
+
+.voice-card-body h2 {
+  margin-top: 10px;
+  font-size: clamp(28px, 3vw, 42px);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+}
+
+.voice-guest {
+  display: block;
+  margin-top: 12px;
+  font-size: 12px;
+  line-height: 1.2;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.voice-card-body p {
+  max-width: 620px;
+  margin-top: 22px;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.read-link {
+  display: inline-block;
+  margin-top: 24px;
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+@media (max-width: 760px) {
+  .voice-card {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .voice-card-img img {
+    max-width: 320px;
+  }
+}

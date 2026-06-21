@@ -3,50 +3,59 @@ import { getCollection } from 'astro:content';
 import MainLayout from '../../layouts/MainLayout.astro';
 
 const voices = (await getCollection('voices'))
-  .filter(v => v.data.language === 'ru')
+  .filter((v) => v.data.language === 'ru')
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
 const fmt = (d: Date) =>
   d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
 ---
 
-<MainLayout title="Голоса">
-  <div class="page-header">
-    <span class="meta">Раздел</span>
-    <h1>Голоса</h1>
-    <p>Подкасты, разговоры и записи — память, которая звучит голосом.</p>
-  </div>
+<MainLayout title="Why Indigenous Women Love. And Laugh">
+  <section class="voices-page">
+    <header class="voices-header">
+      <span class="meta">Подкаст</span>
 
-  <div class="voice-list">
-    {voices.map((v, i) => (
-      <article class="voice-card">
-        <div class="voice-card-img">
-          <img
-            src={v.data.coverImage ?? '/uploads/kaighi-hero.png'}
-            alt={v.data.title}
-          />
-          {v.data.episodeNumber && (
-            <span class="voice-card-ep">Эп. {v.data.episodeNumber}</span>
-          )}
-        </div>
+      <h1>Why Indigenous Women Love. And Laugh</h1>
 
-        <div class="voice-card-body">
-          <span class="meta">{fmt(v.data.date)}</span>
-          <h2><a href={`/voices/${v.id}`}>{v.data.title}</a></h2>
-          {v.data.guestName && (
-            <span class="voice-guest">{v.data.guestName}</span>
-          )}
-          {v.data.shortDescription && (
-            <p>{v.data.shortDescription}</p>
-          )}
-          <div class="voice-card-footer">
-            <a class="read-link" href={`/voices/${v.id}`}>Слушать →</a>
-            {v.data.duration && (
-              <span class="voice-duration">{v.data.duration}</span>
+      <p class="voices-lead">
+        Истории коренных женщин о любви, смехе, языке, памяти и жизни.
+      </p>
+
+      <p class="voices-intro">
+        Разговоры с женщинами, которые хранят память своих семей и народов,
+        рассказывают истории, передают язык и помогают словом.
+      </p>
+    </header>
+
+    <div class="voice-list">
+      {voices.map((v) => (
+        <article class="voice-card">
+          <a class="voice-card-img" href={`/voices/${v.id}`}>
+            <img
+              src={v.data.coverImage ?? '/uploads/kaighi-hero.png'}
+              alt={v.data.title}
+            />
+          </a>
+
+          <div class="voice-card-body">
+            <span class="meta">{fmt(v.data.date)}</span>
+
+            <h2>
+              <a href={`/voices/${v.id}`}>{v.data.title}</a>
+            </h2>
+
+            {v.data.guestName && (
+              <span class="voice-guest">{v.data.guestName}</span>
             )}
+
+            {v.data.shortDescription && (
+              <p>{v.data.shortDescription}</p>
+            )}
+
+            <a class="read-link" href={`/voices/${v.id}`}>Слушать историю →</a>
           </div>
-        </div>
-      </article>
-    ))}
-  </div>
+        </article>
+      ))}
+    </div>
+  </section>
 </MainLayout>
