@@ -1280,3 +1280,14 @@ body:has(.night-shell) { background: var(--nb); }
     max-width: 320px;
   }
 }
+
+.voice-list {
+  border-top: none;
+}
+
+.voice-card,
+.voice-card:first-child,
+.voice-card:last-child {
+  border-top: none;
+  border-bottom: none;
+}
