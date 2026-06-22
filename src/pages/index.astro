@@ -1,50 +1,131 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
 
-const sideItems = [
-  { title: 'Наукан и море',               image: '/uploads/kaighi-hero.png', href: '/stories/naukan-i-more' },
-  { title: 'Наукан — граница двух миров', image: '/uploads/kaighi-hero.png', href: '/stories/granitsa-dvukh-mirov' },
-  { title: 'Память о доме',               image: '/uploads/mom.png',          href: '/stories/pamyat-o-dome' },
+const featured = {
+  type: 'Подкаст',
+  date: '1 июня 2026 г.',
+  title: 'Помочь словом: радио, язык и память',
+  image: '/uploads/mom.png',
+  href: '/voices/pomoch-slovom-radio-yazyk-i-pamyat',
+  excerpt:
+    'Айвана Энмынкау разговаривает со своей мамой Ниной Энмынкау о её работе на радио, языке и памяти.',
+};
+
+const updates = [
+  {
+    type: 'Голоса',
+    date: '1 июня 2026 г.',
+    title: 'Помочь словом: радио, язык и память',
+    image: '/uploads/mom.png',
+    href: '/voices/pomoch-slovom-radio-yazyk-i-pamyat',
+  },
+  {
+    type: 'Истории',
+    date: '28 мая 2022 г.',
+    title: 'Наукан — граница двух миров',
+    image: '/uploads/kaighi-hero.png',
+    href: '/stories/granitsa-dvukh-mirov',
+  },
+  {
+    type: 'Истории',
+    date: '28 мая 2022 г.',
+    title: 'Наукан и море',
+    image: '/uploads/kaighi-hero.png',
+    href: '/stories/naukan-i-more',
+  },
+  {
+    type: 'Истории',
+    date: '28 мая 2022 г.',
+    title: 'Память о доме',
+    image: '/uploads/mom.png',
+    href: '/stories/pamyat-o-dome',
+  },
+];
+
+const explainers = [
+  {
+    title: 'Что такое Каиги',
+    href: '/about/kaighi',
+    excerpt:
+      'Kaighi — цифровая общественная яранга для голосов, историй, рецептов и памяти нувукахми.',
+  },
+  {
+    title: 'Как пользоваться сайтом',
+    href: '/about/how-to-use',
+    excerpt:
+      'Здесь можно слушать подкасты, читать истории, собирать рецепты и возвращать имена Наукана.',
+  },
+  {
+    title: 'Что такое Наукан',
+    href: '/about/naukan',
+    excerpt:
+      'Наукан — поселение на краю Евразии, место памяти, языка и родовых историй.',
+  },
+  {
+    title: 'Кто такой Тасян Теин',
+    href: '/about/tasyan-tein',
+    excerpt:
+      'Науканский археолог, этнограф и писатель, сохранивший Наукан на бумаге.',
+  },
 ];
 
 const storyItems = [
-  { title: 'Наукан — граница двух миров', image: '/uploads/kaighi-hero.png', href: '/stories/granitsa-dvukh-mirov', excerpt: 'Наукан стоял на самом краю Евразии — там, где Чукотка смотрит на Аляску через узкий пролив.' },
-  { title: 'Наукан и море',               image: '/uploads/kaighi-hero.png', href: '/stories/naukan-i-more',        excerpt: 'Вся жизнь моего народа — эскимосов нувукахми — была связана с морем.' },
-  { title: 'Память о доме',               image: '/uploads/mom.png',          href: '/stories/pamyat-o-dome',       excerpt: 'Что значит помнить место, которого больше нет?' },
+  {
+    title: 'Наукан — граница двух миров',
+    image: '/uploads/kaighi-hero.png',
+    href: '/stories/granitsa-dvukh-mirov',
+    excerpt:
+      'Наукан стоял на самом краю Евразии — там, где Чукотка смотрит на Аляску через узкий пролив.',
+  },
+  {
+    title: 'Наукан и море',
+    image: '/uploads/kaighi-hero.png',
+    href: '/stories/naukan-i-more',
+    excerpt:
+      'Вся жизнь моего народа — эскимосов нувукахми — была связана с морем.',
+  },
+  {
+    title: 'Память о доме',
+    image: '/uploads/mom.png',
+    href: '/stories/pamyat-o-dome',
+    excerpt: 'Что значит помнить место, которого больше нет?',
+  },
 ];
 ---
 
 <MainLayout title="Главная" isHome={true}>
-
   <section class="hero-shell" aria-label="Kaighi">
     <div class="wing-layer" aria-hidden="true"></div>
 
     <h1 class="site-logo" aria-label="KAIGHI">
       <span>K</span><span>A</span><span>I</span><span>G</span><span>H</span><span>I</span>
     </h1>
+
     <p class="site-subtitle">общественная яранга на краю земли</p>
 
     <div class="hero-grid">
       <article class="hero-feature">
-        <img src="/uploads/kaighi-hero.png" alt="Наукан" />
-        <p class="meta">28 мая 2022 г.</p>
-        <h2>О Каиги</h2>
-        <p>
-          <strong>Kaighi</strong> — цифровая общественная яранга для голосов,
-          историй, рецептов и памяти эскимосского народа нувукахми.
-        </p>
-        <p>
-          Здесь можно слушать подкасты, читать рассказы, собирать семейные
-          рецепты и возвращать имена, слова и следы Наукана.
-        </p>
+        <a href={featured.href}>
+          <img src={featured.image} alt="" />
+        </a>
+
+        <p class="meta">{featured.type} · {featured.date}</p>
+
+        <h2>
+          <a href={featured.href}>{featured.title}</a>
+        </h2>
+
+        <p>{featured.excerpt}</p>
+
+        <a class="read-link" href={featured.href}>Слушать историю →</a>
       </article>
 
-      <aside class="hero-list" aria-label="Последние материалы">
-        {sideItems.map((item) => (
+      <aside class="hero-list" aria-label="Последние обновления">
+        {updates.map((item) => (
           <a class="hero-card" href={item.href}>
             <img src={item.image} alt="" />
             <div>
-              <p class="meta">28 мая 2022 г.</p>
+              <p class="meta">{item.type} · {item.date}</p>
               <h3>{item.title}</h3>
             </div>
           </a>
@@ -53,16 +134,35 @@ const storyItems = [
     </div>
   </section>
 
+  <section class="explainers-section" aria-labelledby="explainers-heading">
+    <p class="section-kicker" id="explainers-heading">Объясняем</p>
+
+    <div class="explainer-grid">
+      {explainers.map((item) => (
+        <a class="explainer-card" href={item.href}>
+          <h2>{item.title}</h2>
+          <p>{item.excerpt}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
   <section class="story-section" aria-labelledby="stories-heading">
     <p class="section-kicker" id="stories-heading">Истории и рассказы</p>
+
     <div class="story-grid">
       {storyItems.map((item) => (
         <article class="story-card">
           <a href={item.href}>
             <img src={item.image} alt="" />
           </a>
+
           <p class="meta">28 мая 2022 г.</p>
-          <h2><a href={item.href}>{item.title}</a></h2>
+
+          <h2>
+            <a href={item.href}>{item.title}</a>
+          </h2>
+
           <p>{item.excerpt}</p>
         </article>
       ))}
@@ -70,45 +170,47 @@ const storyItems = [
   </section>
 
   <section class="scheme-section" aria-labelledby="scheme-title">
-  <p class="outline-title">Схема</p>
-  <h2 id="scheme-title">Наукана</h2>
+    <p class="outline-title">Схема</p>
+    <h2 id="scheme-title">Наукана</h2>
 
-  <div class="map-credit">
-    <p>
-      Эта карта Наукана воспроизведена по рисунку науканского археолога,
-      этнографа и писателя <strong>Тасяна Теина</strong>.
-    </p>
-  </div>
+    <div class="map-credit">
+      <p>
+        Эта карта Наукана воспроизведена по рисунку науканского археолога,
+        этнографа и писателя <strong>Тасяна Теина</strong>.
+      </p>
+    </div>
 
-  <img
-    class="naukan-map"
-    src="/images/map.svg"
-    alt="Карта Наукана"
-  />
-</section>
-
+    <img
+      class="naukan-map"
+      src="/images/map.svg"
+      alt="Карта Наукана"
+    />
+  </section>
 
   <section class="contact-section" aria-labelledby="contact-heading">
     <p class="contact-intro">
       Есть вопросы или предложения? Напишите автору сайта, используя эту форму.
     </p>
+
     <form class="contact-form" onsubmit="return false">
       <div class="contact-left">
         <label>
           <span>Имя</span>
           <input name="name" type="text" autocomplete="name" />
         </label>
+
         <label>
           <span>Почта</span>
           <input name="email" type="email" autocomplete="email" />
         </label>
+
         <button type="button">Отправить</button>
       </div>
+
       <label class="message-field">
         <span id="contact-heading">Сообщение</span>
         <textarea name="message" rows="5"></textarea>
       </label>
     </form>
   </section>
-
 </MainLayout>

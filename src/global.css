@@ -1269,3 +1269,45 @@ body:has(.night-shell) { background: var(--nb); }
     max-width: 320px;
   }
 }
+
+/* =========================
+   EXPLAINERS
+   ========================= */
+
+.explainers-section {
+  padding: 5rem 0;
+  border-top: 1px solid var(--gold);
+}
+
+.explainer-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.explainer-card {
+  display: block;
+  padding: 2rem;
+  border: 1px solid var(--line);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.2s ease;
+}
+
+.explainer-card:hover {
+  border-color: var(--gold);
+}
+
+.explainer-card h2 {
+  margin: 0 0 1rem;
+  font-size: 1.8rem;
+  line-height: 1.15;
+}
+
+.explainer-card p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--muted);
+}
