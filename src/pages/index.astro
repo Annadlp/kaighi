@@ -134,6 +134,26 @@ const explainers = [
     </form>
   </section>
 
+  <section class="story-section explainers-section" aria-labelledby="explainers-heading">
+    <p class="section-kicker" id="explainers-heading">Объясняем</p>
+
+    <div class="story-grid">
+      {explainers.map((item) => (
+        <article class="story-card">
+          <a href={item.href}>
+            <img src={item.image} alt="" />
+          </a>
+
+          <h2>
+            <a href={item.href}>{item.title}</a>
+          </h2>
+
+          <p>{item.excerpt}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
   <section class="scheme-section" aria-labelledby="scheme-title">
     <p class="outline-title">Схема</p>
     <h2 id="scheme-title">Наукана</h2>

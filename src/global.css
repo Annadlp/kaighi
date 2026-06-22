@@ -1270,7 +1270,10 @@ body:has(.night-shell) { background: var(--nb); }
   }
 }
 
-/* HOME PAGE REWORK */
+
+/* ══════════════════════════════════════════════
+   16. HOME PAGE FINAL TEMPLATE
+   ══════════════════════════════════════════════ */
 
 .site-header {
   padding-top: 28px;
@@ -1280,10 +1283,43 @@ body:has(.night-shell) { background: var(--nb); }
   padding-top: 24px;
 }
 
+.hero-grid {
+  grid-template-columns: minmax(0, 1.08fr) minmax(320px, .92fr);
+  gap: 48px;
+  align-items: start;
+}
+
+.hero-feature {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.hero-feature .meta {
+  display: block;
+  margin-top: 16px;
+}
+
+.hero-feature h2 {
+  margin-top: 18px;
+}
+
+.hero-feature p:not(.meta) {
+  margin-top: 18px;
+}
+
+.read-link,
+.hero-feature .read-link,
+.voice-card .read-link {
+  border-bottom: none;
+  padding-bottom: 0;
+  text-decoration: none;
+}
+
 .hero-list {
   max-height: 430px;
   overflow-y: auto;
   padding-right: 10px;
+  border-top: 1px solid var(--gold);
 }
 
 .hero-list::-webkit-scrollbar {
@@ -1294,21 +1330,20 @@ body:has(.night-shell) { background: var(--nb); }
   background: var(--gold);
 }
 
-.read-link {
-  border-bottom: none;
-  padding-bottom: 0;
+.hero-card {
+  border-bottom: 1px solid var(--gold);
 }
 
-.hero-feature {
+.hero-card:last-child {
   border-bottom: none;
 }
 
+/* Newsletter */
 .newsletter-strip {
   margin-top: 72px;
   padding: 32px 0;
   border-top: 1px solid var(--gold);
   border-bottom: 1px solid var(--gold);
-
   display: grid;
   grid-template-columns: 1fr 360px;
   gap: 40px;
@@ -1320,6 +1355,7 @@ body:has(.night-shell) { background: var(--nb); }
   font-size: clamp(28px, 4vw, 52px);
   line-height: .95;
   font-weight: 800;
+  letter-spacing: -.04em;
 }
 
 .newsletter-form {
@@ -1344,10 +1380,15 @@ body:has(.night-shell) { background: var(--nb); }
   font-size: 10px;
   font-weight: 800;
   text-transform: uppercase;
+  letter-spacing: .08em;
+  cursor: pointer;
 }
 
+/* Explainers use the old “Истории и рассказы” 3-column card layout */
 .explainers-section {
-  margin-top: 72px;
+  margin-top: 68px;
+  padding-top: 40px;
+  border-top: 2px solid var(--gold);
 }
 
 .explainers-section .story-card .meta {
@@ -1355,20 +1396,36 @@ body:has(.night-shell) { background: var(--nb); }
 }
 
 .explainers-section .story-card h2 {
-  margin-top: 16px;
+  margin-top: 14px;
+  font-size: 24px;
+  line-height: 1.08;
+}
+
+.explainers-section .story-card p {
+  margin-top: 14px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--muted);
 }
 
 @media (max-width: 900px) {
-  .newsletter-strip {
+  .hero-grid {
     grid-template-columns: 1fr;
-  }
-
-  .newsletter-form {
-    grid-template-columns: 1fr;
+    gap: 36px;
   }
 
   .hero-list {
     max-height: none;
     overflow: visible;
+    padding-right: 0;
+  }
+
+  .newsletter-strip {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .newsletter-form {
+    grid-template-columns: 1fr;
   }
 }
