@@ -40,55 +40,43 @@ const updates = [
     image: '/uploads/mom.png',
     href: '/stories/pamyat-o-dome',
   },
+  {
+    type: 'Стол',
+    date: 'скоро',
+    title: 'Рецепты, вкус и память',
+    image: '/uploads/kaighi-hero.png',
+    href: '/table',
+  },
+  {
+    type: 'Предания ночи',
+    date: 'скоро',
+    title: 'Ночные истории Наукана',
+    image: '/uploads/kaighi-hero.png',
+    href: '/night',
+  },
 ];
 
 const explainers = [
   {
     title: 'Что такое Каиги',
+    image: '/uploads/kaighi-hero.png',
     href: '/about/kaighi',
     excerpt:
-      'Kaighi — цифровая общественная яранга для голосов, историй, рецептов и памяти нувукахми.',
-  },
-  {
-    title: 'Как пользоваться сайтом',
-    href: '/about/how-to-use',
-    excerpt:
-      'Здесь можно слушать подкасты, читать истории, собирать рецепты и возвращать имена Наукана.',
+      'Цифровая общественная яранга для голосов, историй, рецептов и памяти нувукахми.',
   },
   {
     title: 'Что такое Наукан',
+    image: '/uploads/kaighi-hero.png',
     href: '/about/naukan',
     excerpt:
-      'Наукан — поселение на краю Евразии, место памяти, языка и родовых историй.',
+      'Поселение на краю Евразии, место памяти, языка и родовых историй.',
   },
   {
     title: 'Кто такой Тасян Теин',
+    image: '/uploads/mom.png',
     href: '/about/tasyan-tein',
     excerpt:
       'Науканский археолог, этнограф и писатель, сохранивший Наукан на бумаге.',
-  },
-];
-
-const storyItems = [
-  {
-    title: 'Наукан — граница двух миров',
-    image: '/uploads/kaighi-hero.png',
-    href: '/stories/granitsa-dvukh-mirov',
-    excerpt:
-      'Наукан стоял на самом краю Евразии — там, где Чукотка смотрит на Аляску через узкий пролив.',
-  },
-  {
-    title: 'Наукан и море',
-    image: '/uploads/kaighi-hero.png',
-    href: '/stories/naukan-i-more',
-    excerpt:
-      'Вся жизнь моего народа — эскимосов нувукахми — была связана с морем.',
-  },
-  {
-    title: 'Память о доме',
-    image: '/uploads/mom.png',
-    href: '/stories/pamyat-o-dome',
-    excerpt: 'Что значит помнить место, которого больше нет?',
   },
 ];
 ---
@@ -134,39 +122,16 @@ const storyItems = [
     </div>
   </section>
 
-  <section class="explainers-section" aria-labelledby="explainers-heading">
-    <p class="section-kicker" id="explainers-heading">Объясняем</p>
-
-    <div class="explainer-grid">
-      {explainers.map((item) => (
-        <a class="explainer-card" href={item.href}>
-          <h2>{item.title}</h2>
-          <p>{item.excerpt}</p>
-        </a>
-      ))}
+  <section class="newsletter-strip" aria-label="Подписка на рассылку">
+    <div>
+      <p class="section-kicker">Рассылка</p>
+      <h2>Новые голоса, истории и предания</h2>
     </div>
-  </section>
 
-  <section class="story-section" aria-labelledby="stories-heading">
-    <p class="section-kicker" id="stories-heading">Истории и рассказы</p>
-
-    <div class="story-grid">
-      {storyItems.map((item) => (
-        <article class="story-card">
-          <a href={item.href}>
-            <img src={item.image} alt="" />
-          </a>
-
-          <p class="meta">28 мая 2022 г.</p>
-
-          <h2>
-            <a href={item.href}>{item.title}</a>
-          </h2>
-
-          <p>{item.excerpt}</p>
-        </article>
-      ))}
-    </div>
+    <form class="newsletter-form" onsubmit="return false">
+      <input type="email" name="email" placeholder="Ваша почта" />
+      <button type="button">Подписаться</button>
+    </form>
   </section>
 
   <section class="scheme-section" aria-labelledby="scheme-title">

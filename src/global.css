@@ -1270,44 +1270,105 @@ body:has(.night-shell) { background: var(--nb); }
   }
 }
 
-/* =========================
-   EXPLAINERS
-   ========================= */
+/* HOME PAGE REWORK */
+
+.site-header {
+  padding-top: 28px;
+}
+
+.hero-shell {
+  padding-top: 24px;
+}
+
+.hero-list {
+  max-height: 430px;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.hero-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.hero-list::-webkit-scrollbar-thumb {
+  background: var(--gold);
+}
+
+.read-link {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.hero-feature {
+  border-bottom: none;
+}
+
+.newsletter-strip {
+  margin-top: 72px;
+  padding: 32px 0;
+  border-top: 1px solid var(--gold);
+  border-bottom: 1px solid var(--gold);
+
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 40px;
+  align-items: center;
+}
+
+.newsletter-strip h2 {
+  margin-top: 8px;
+  font-size: clamp(28px, 4vw, 52px);
+  line-height: .95;
+  font-weight: 800;
+}
+
+.newsletter-form {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+}
+
+.newsletter-form input {
+  height: 38px;
+  border: 1px solid var(--ink);
+  background: transparent;
+  padding: 0 12px;
+}
+
+.newsletter-form button {
+  height: 38px;
+  border: 0;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 0 18px;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
 
 .explainers-section {
-  padding: 5rem 0;
-  border-top: 1px solid var(--gold);
+  margin-top: 72px;
 }
 
-.explainer-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
+.explainers-section .story-card .meta {
+  display: none;
 }
 
-.explainer-card {
-  display: block;
-  padding: 2rem;
-  border: 1px solid var(--line);
-  text-decoration: none;
-  color: inherit;
-  transition: border-color 0.2s ease;
+.explainers-section .story-card h2 {
+  margin-top: 16px;
 }
 
-.explainer-card:hover {
-  border-color: var(--gold);
-}
+@media (max-width: 900px) {
+  .newsletter-strip {
+    grid-template-columns: 1fr;
+  }
 
-.explainer-card h2 {
-  margin: 0 0 1rem;
-  font-size: 1.8rem;
-  line-height: 1.15;
-}
+  .newsletter-form {
+    grid-template-columns: 1fr;
+  }
 
-.explainer-card p {
-  margin: 0;
-  font-size: 1rem;
-  line-height: 1.7;
-  color: var(--muted);
+  .hero-list {
+    max-height: none;
+    overflow: visible;
+  }
 }
