@@ -12,7 +12,9 @@ const fmt = (d: Date) =>
 
 <MainLayout title="Why Indigenous Women Love. And Laugh">
   <section class="voices-page">
-    <header class="voices-header">
+
+  <section class="voices-hero">
+    <div class="voices-hero-text">
       <span class="meta">Подкаст</span>
 
       <h1>Why Indigenous Women Love. And Laugh</h1>
@@ -25,7 +27,17 @@ const fmt = (d: Date) =>
         Разговоры с женщинами, которые хранят память своих семей и народов,
         рассказывают истории, передают язык и помогают словом.
       </p>
-    </header>
+    </div>
+
+    <div class="voices-hero-image">
+      <img
+        src="/images/podcast-hero.png"
+        alt="Why Indigenous Women Love and Laugh"
+      />
+    </div>
+  </section>
+
+  <div class="voice-list">
 
     <div class="voice-list">
       {voices.map((v) => (

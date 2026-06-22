@@ -1161,33 +1161,52 @@ body:has(.night-shell) { background: var(--nb); }
   padding: 72px 0 96px;
 }
 
-.voices-header {
-  max-width: 980px;
-  margin-bottom: 56px;
+.voices-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  gap: 56px;
+  align-items: center;
+  margin-bottom: 72px;
 }
 
-.voices-header h1 {
-  max-width: 920px;
-  margin-top: 18px;
-  font-size: clamp(48px, 7.4vw, 108px);
-  line-height: 0.92;
+.voices-hero-text {
+  max-width: 640px;
+}
+
+.voices-hero .meta {
+  display: block;
+  margin-bottom: 24px;
+}
+
+.voices-hero h1 {
+  margin: 0;
+  font-size: clamp(48px, 6vw, 82px);
+  line-height: 1.02;
   letter-spacing: -0.06em;
 }
 
 .voices-lead {
-  max-width: 760px;
+  max-width: 620px;
   margin-top: 28px;
-  font-size: clamp(22px, 2.4vw, 34px);
+  font-size: clamp(24px, 2.5vw, 34px);
   line-height: 1.18;
-  font-weight: 700;
+  font-weight: 800;
 }
 
 .voices-intro {
-  max-width: 680px;
+  max-width: 600px;
   margin-top: 18px;
   font-size: 18px;
   line-height: 1.55;
   color: var(--muted);
+}
+
+.voices-hero-image img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 28px;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.16);
 }
 
 .voice-list {
@@ -1246,6 +1265,19 @@ body:has(.night-shell) { background: var(--nb); }
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.08em;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+@media (max-width: 900px) {
+  .voices-hero {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .voices-hero-image {
+    max-width: 420px;
+  }
 }
 
 @media (max-width: 760px) {
