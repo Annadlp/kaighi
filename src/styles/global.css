@@ -698,7 +698,7 @@ section:not(.hero) {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(18px, 4vw, 48px);
   width: min(760px, 100%);
-  margin: clamp(54px, 8vw, 92px) auto clamp(180px, 22vw, 340px);
+  margin: clamp(54px, 8vw, 92px) auto clamp(78px, 10vw, 132px);
   padding-top: 24px;
   border-top: 1px solid rgba(255, 250, 240, 0.2);
   color: #bfb5a8;
@@ -727,9 +727,7 @@ section:not(.hero) {
   align-items: end;
   width: min(760px, 100%);
   margin: 0 auto;
-  padding: clamp(38px, 6vw, 58px) 0;
-  border-top: 1px solid rgba(255, 250, 240, 0.68);
-  border-bottom: 1px solid rgba(255, 250, 240, 0.68);
+  padding: clamp(18px, 3vw, 28px) 0 0;
 }
 
 .story__subscribe p {
