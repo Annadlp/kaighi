@@ -698,7 +698,7 @@ section:not(.hero) {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(18px, 4vw, 48px);
   width: min(760px, 100%);
-  margin: clamp(54px, 8vw, 92px) auto 0;
+  margin: clamp(54px, 8vw, 92px) auto clamp(180px, 22vw, 340px);
   padding-top: 24px;
   border-top: 1px solid rgba(255, 250, 240, 0.2);
   color: #bfb5a8;
@@ -726,7 +726,7 @@ section:not(.hero) {
   gap: clamp(24px, 6vw, 72px);
   align-items: end;
   width: min(760px, 100%);
-  margin: clamp(150px, 18vw, 260px) auto 0;
+  margin: 0 auto;
   padding: clamp(38px, 6vw, 58px) 0;
   border-top: 1px solid rgba(255, 250, 240, 0.68);
   border-bottom: 1px solid rgba(255, 250, 240, 0.68);
