@@ -1,0 +1,142 @@
+---
+import "../styles/global.css";
+
+const navItems = [
+  { href: "/", label: "Главная" },
+  { href: "/#stories", label: "Рассказы" },
+  { href: "/#night-tales", label: "Предания" },
+  { href: "/#kitchen", label: "Кухня" },
+  { href: "/#blog", label: "Блог" },
+  { href: "/#contacts", label: "Контакты" },
+];
+
+const episodes = [
+  {
+    number: "01",
+    title: "Помочь словом: радио, язык и память",
+    guest:
+      "Айвана Энмынкау разговаривает со своей мамой, Ниной Энмынкау, о радио, родном языке, памяти и о том, что значит помочь словом.",
+    length: "Эпизод 1",
+    playerSrc:
+      "https://www.buzzsprout.com/2621862/episodes/19279591-1?client_source=small_player&iframe=true",
+  },
+  {
+    number: "02",
+    title: "Laughing with aunties",
+    guest: "О смехе как способе выжить, спорить и быть любимой",
+    length: "38 мин",
+  },
+  {
+    number: "03",
+    title: "The soft work of memory",
+    guest: "Письма, фотографии, голоса и то, что держит семью вместе",
+    length: "47 мин",
+  },
+];
+
+const platforms = ["Spotify", "Apple Podcasts", "YouTube", "RSS"];
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Страница подкаста KAIGHI: Why Indigenous Women Love. And Laugh."
+    />
+    <title>Why Indigenous Women Love. And Laugh. — KAIGHI</title>
+  </head>
+  <body class="podcast-page">
+    <header class="site-header podcast-header" aria-label="Навигация подкаста">
+      <a class="brand" href="/" aria-label="KAIGHI">KAIGHI</a>
+      <nav>
+        {navItems.map((item) => <a href={item.href}>{item.label}</a>)}
+      </nav>
+    </header>
+
+    <main>
+      <section class="podcast-hero" aria-label="Why Indigenous Women Love. And Laugh.">
+        <div class="podcast-hero__media">
+          <img src="/images/kaighi-podcast.png" alt="Стол с микрофонами для записи подкаста" />
+        </div>
+        <div class="podcast-hero__copy">
+          <p class="eyebrow">Подкаст KAIGHI</p>
+          <h1>Why Indigenous Women Love. And Laugh.</h1>
+          <p class="lede">
+            Разговоры с Indigenous women о любви, родстве, смехе, языке,
+            работе памяти и том, как держаться вместе без патетики.
+          </p>
+          <div class="podcast-actions" aria-label="Платформы подкаста">
+            {platforms.map((platform) => <a href="#subscribe">{platform}</a>)}
+          </div>
+        </div>
+      </section>
+
+      <section class="podcast-intro grid-section">
+        <div>
+          <p class="section-kicker">Формат</p>
+          <h2>Живой разговор, не интервью по списку</h2>
+        </div>
+        <p>
+          Каждый выпуск начинается с темы, но оставляет место для пауз,
+          смешных отступлений и внезапной точности. Это подкаст о том, как
+          любовь работает в семьях, сообществах, языках, книгах, фильмах и
+          ежедневных жестах заботы.
+        </p>
+      </section>
+
+      <section class="episodes" aria-label="Выпуски">
+        <div class="section-heading">
+          <p class="section-kicker">Выпуски</p>
+          <h2>Первый сезон</h2>
+        </div>
+        <div class="episode-list">
+          {episodes.map((episode) => (
+            <article>
+              <span>{episode.number}</span>
+              <div>
+                <h3>{episode.title}</h3>
+                <p>{episode.guest}</p>
+                {episode.playerSrc ? (
+                  <div class="episode-player">
+                    <iframe
+                      src={episode.playerSrc}
+                      loading="lazy"
+                      width="100%"
+                      height="200"
+                      frameborder="0"
+                      scrolling="no"
+                      title="Why Indigenous Women Love. And Laugh., Эпизод 1. Помочь словом: радио, язык и память"
+                    ></iframe>
+                  </div>
+                ) : null}
+              </div>
+              <strong>{episode.length}</strong>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section class="podcast-invite" id="subscribe">
+        <div>
+          <p class="section-kicker">Слушать и участвовать</p>
+          <h2>Предложите голос для следующего выпуска</h2>
+        </div>
+        <div class="podcast-invite__panel">
+          <p>
+            Можно предложить героиню, тему, книгу, фильм или семейную историю,
+            которая должна прозвучать. Письма читает редакция KAIGHI.
+          </p>
+          <a class="text-link" href="mailto:hello@kaighi.org">hello@kaighi.org</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>KAIGHI</span>
+      <p>Why Indigenous Women Love. And Laugh.</p>
+    </footer>
+  </body>
+</html>
