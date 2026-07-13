@@ -1,0 +1,166 @@
+---
+import "../styles/global.css";
+
+type Theme = "dark" | "light";
+
+type NavItem = {
+  href: string;
+  label: string;
+};
+
+type StoryImage = {
+  src: string;
+  alt: string;
+  caption?: string;
+};
+
+type StoryMeta = {
+  text: string;
+  href?: string;
+  linkText?: string;
+};
+
+type StoryLink = {
+  href: string;
+  label: string;
+};
+
+type Props = {
+  theme: Theme;
+  title: string;
+  description: string;
+  sectionTitle: string;
+  backHref: string;
+  backLabel: string;
+  dek: string;
+  intro?: string;
+  paragraphs: string[];
+  image?: StoryImage;
+  metaItems?: StoryMeta[];
+  navItems?: NavItem[];
+  footerLinks?: StoryLink[];
+  subscribeTitle?: string;
+  subscribeText?: string;
+};
+
+const {
+  theme,
+  title,
+  description,
+  sectionTitle,
+  backHref,
+  backLabel,
+  dek,
+  intro,
+  paragraphs,
+  image,
+  metaItems = [],
+  navItems = [
+    { href: "/", label: "Главная" },
+    { href: "/#night-tales", label: "Предания" },
+    { href: "/podcast/", label: "Подкаст" },
+    { href: "/#stories", label: "Рассказы" },
+    { href: "/#contacts", label: "Контакты" },
+  ],
+  footerLinks = [
+    { href: "/", label: "Главная" },
+    { href: "/#night-tales", label: "Предания" },
+    { href: "/podcast/", label: "Подкаст" },
+    { href: "mailto:hello@kaighi.org", label: "hello@kaighi.org" },
+  ],
+  subscribeTitle = "Подпишитесь, чтобы получать больше историй",
+  subscribeText = "Новые предания, эссе и заметки KAIGHI — письмом, без шума.",
+} = Astro.props;
+
+const bodyClass = `story-page story-page--${theme}`;
+const navLabel = theme === "dark" ? "Навигация предания" : "Навигация рассказа";
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{title} — KAIGHI</title>
+  </head>
+  <body class={bodyClass}>
+    <header class="site-header story-header" aria-label={navLabel}>
+      <a class="brand" href="/" aria-label="KAIGHI">KAIGHI</a>
+      <nav>
+        {navItems.map((item) => <a href={item.href}>{item.label}</a>)}
+      </nav>
+    </header>
+
+    <main>
+      <article class="story">
+        <header class="story__hero">
+          <a class="story__back" href={backHref}>{backLabel}</a>
+          <h1>{title}</h1>
+          <p class="story__dek">{dek}</p>
+        </header>
+
+        <div class="story__body">
+          {intro ? <p class="story__intro">{intro}</p> : null}
+          {image ? (
+            <figure class="story__figure">
+              <img src={image.src} alt={image.alt} />
+              {image.caption ? <figcaption>{image.caption}</figcaption> : null}
+            </figure>
+          ) : null}
+          {paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+        </div>
+
+        {metaItems.length ? (
+          <aside class="story__meta" aria-label="Сведения о публикации">
+            {metaItems.map((item) => (
+              <p>
+                {item.text}
+                {item.href && item.linkText ? (
+                  <>
+                    {" "}
+                    <a href={item.href} target="_blank" rel="noopener noreferrer">
+                      {item.linkText}
+                    </a>
+                  </>
+                ) : null}
+              </p>
+            ))}
+          </aside>
+        ) : null}
+
+        <section class="story__subscribe" aria-label="Подписка на KAIGHI">
+          <div>
+            <p>{subscribeTitle}</p>
+            <span>{subscribeText}</span>
+          </div>
+          <form
+            action="mailto:hello@kaighi.org"
+            method="post"
+            enctype="text/plain"
+          >
+            <label for="story-subscribe-email">Email</label>
+            <input
+              id="story-subscribe-email"
+              name="email"
+              type="email"
+              placeholder="you@example.com"
+              required
+            />
+            <button type="submit">Подписаться</button>
+          </form>
+        </section>
+      </article>
+    </main>
+
+    <footer class="story-footer">
+      <div>
+        <span>KAIGHI</span>
+        <p>{sectionTitle}</p>
+      </div>
+      <nav aria-label="Нижняя навигация">
+        {footerLinks.map((item) => <a href={item.href}>{item.label}</a>)}
+      </nav>
+    </footer>
+  </body>
+</html>

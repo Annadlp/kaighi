@@ -1,13 +1,5 @@
 ---
-import "../../styles/global.css";
-
-const navItems = [
-  { href: "/", label: "Главная" },
-  { href: "/#night-tales", label: "Предания" },
-  { href: "/podcast/", label: "Подкаст" },
-  { href: "/#stories", label: "Рассказы" },
-  { href: "/#contacts", label: "Контакты" },
-];
+import StoryLayout from "../../layouts/StoryLayout.astro";
 
 const paragraphs = [
   "Сначала я увидела человека в воде.",
@@ -71,109 +63,31 @@ const paragraphs = [
 ];
 ---
 
-<!doctype html>
-<html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Итака красива издалека — предание KAIGHI о Пенелопе, времени, ткани и уходе."
-    />
-    <title>Итака красива издалека — KAIGHI</title>
-  </head>
-  <body class="story-page">
-    <header class="site-header story-header" aria-label="Навигация предания">
-      <a class="brand" href="/" aria-label="KAIGHI">KAIGHI</a>
-      <nav>
-        {navItems.map((item) => <a href={item.href}>{item.label}</a>)}
-      </nav>
-    </header>
-
-    <main>
-      <article class="story">
-        <header class="story__hero">
-          <a class="story__back" href="/#night-tales">Назад в Предания</a>
-          <h1>Итака красива издалека</h1>
-          <p class="story__dek">
-            Пенелопа так и не дождалась Одиссея. Она устала быть символом
-            верности и домашнего очага — и впервые смотрит на Итаку глазами
-            человека, который уходит.
-          </p>
-        </header>
-
-        <div class="story__body">
-          <p class="story__intro">
-            Писательница Анна Ледова переосмысляет гомеровский эпос. В созданном
-            ей мире Пенелопа просыпается, видит, как человек исчезает за минуту
-            и вдруг понимает, что из этих минут сложились годы.
-          </p>
-          <figure class="story__figure">
-            <img
-              src="/images/ithaca.webp"
-              alt="Иллюстрация к рассказу «Итака красива издалека»"
-            />
-            <figcaption>
-              Иллюстрация: anastasiia_popv
-            </figcaption>
-          </figure>
-          {paragraphs.map((paragraph) => <p>{paragraph}</p>)}
-        </div>
-
-        <aside class="story__meta" aria-label="Сведения о публикации">
-          <p>
-            Идея и авторство иллюстрации:
-            <a
-              href="https://www.instagram.com/anastasiia_popv?igsh=MTdxazdsamlhZGRiOA%3D%3D&utm_source=qr"
-              target="_blank"
-              rel="noopener noreferrer">anastasiia_popv</a
-            >
-          </p>
-          <p>
-            Впервые опубликовано в журнале
-            <a
-              href="https://discours.io/expo/literature/prose/ithaca-from-afar"
-              target="_blank"
-              rel="noopener noreferrer">«Дискурс»</a
-            >.
-          </p>
-        </aside>
-
-        <section class="story__subscribe" aria-label="Подписка на KAIGHI">
-          <div>
-            <p>Подпишитесь, чтобы получать больше историй</p>
-            <span>Новые предания, эссе и заметки KAIGHI — письмом, без шума.</span>
-          </div>
-          <form
-            action="mailto:hello@kaighi.org"
-            method="post"
-            enctype="text/plain"
-          >
-            <label for="story-subscribe-email">Email</label>
-            <input
-              id="story-subscribe-email"
-              name="email"
-              type="email"
-              placeholder="you@example.com"
-              required
-            />
-            <button type="submit">Подписаться</button>
-          </form>
-        </section>
-      </article>
-    </main>
-
-    <footer class="story-footer">
-      <div>
-        <span>KAIGHI</span>
-        <p>Общественная яранга в Наукане</p>
-      </div>
-      <nav aria-label="Нижняя навигация">
-        <a href="/">Главная</a>
-        <a href="/#night-tales">Предания</a>
-        <a href="/podcast/">Подкаст</a>
-        <a href="mailto:hello@kaighi.org">hello@kaighi.org</a>
-      </nav>
-    </footer>
-  </body>
-</html>
+<StoryLayout
+  theme="dark"
+  title="Итака красива издалека"
+  description="Итака красива издалека — предание KAIGHI о Пенелопе, времени, ткани и уходе."
+  sectionTitle="Предания Ночи"
+  backHref="/#night-tales"
+  backLabel="Назад в Предания"
+  dek="Пенелопа так и не дождалась Одиссея. Она устала быть символом верности и домашнего очага — и впервые смотрит на Итаку глазами человека, который уходит."
+  intro="Писательница Анна Ледова переосмысляет гомеровский эпос. В созданном ей мире Пенелопа просыпается, видит, как человек исчезает за минуту и вдруг понимает, что из этих минут сложились годы."
+  paragraphs={paragraphs}
+  image={{
+    src: "/images/ithaca.webp",
+    alt: "Иллюстрация к рассказу «Итака красива издалека»",
+    caption: "Иллюстрация: anastasiia_popv",
+  }}
+  metaItems={[
+    {
+      text: "Идея и авторство иллюстрации:",
+      href: "https://www.instagram.com/anastasiia_popv?igsh=MTdxazdsamlhZGRiOA%3D%3D&utm_source=qr",
+      linkText: "anastasiia_popv",
+    },
+    {
+      text: "Впервые опубликовано в журнале",
+      href: "https://discours.io/expo/literature/prose/ithaca-from-afar",
+      linkText: "«Дискурс».",
+    },
+  ]}
+/>
