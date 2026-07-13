@@ -100,22 +100,6 @@ const paragraphs = [
             верности и домашнего очага — и впервые смотрит на Итаку глазами
             человека, который уходит.
           </p>
-          <p class="story__credit">
-            Идея и авторство иллюстрации:
-            <a
-              href="https://www.instagram.com/anastasiia_popv?igsh=MTdxazdsamlhZGRiOA%3D%3D&utm_source=qr"
-              target="_blank"
-              rel="noopener noreferrer">anastasiia_popv</a
-            >
-          </p>
-          <p class="story__publication">
-            Впервые опубликовано в журнале
-            <a
-              href="https://discours.io/expo/literature/prose/ithaca-from-afar"
-              target="_blank"
-              rel="noopener noreferrer">«Дискурс»</a
-            >.
-          </p>
         </header>
 
         <div class="story__body">
@@ -135,6 +119,32 @@ const paragraphs = [
           </figure>
           {paragraphs.map((paragraph) => <p>{paragraph}</p>)}
         </div>
+
+        <aside class="story__meta" aria-label="Сведения о публикации">
+          <p>
+            Идея и авторство иллюстрации:
+            <a
+              href="https://www.instagram.com/anastasiia_popv?igsh=MTdxazdsamlhZGRiOA%3D%3D&utm_source=qr"
+              target="_blank"
+              rel="noopener noreferrer">anastasiia_popv</a
+            >
+          </p>
+          <p>
+            Впервые опубликовано в журнале
+            <a
+              href="https://discours.io/expo/literature/prose/ithaca-from-afar"
+              target="_blank"
+              rel="noopener noreferrer">«Дискурс»</a
+            >.
+          </p>
+        </aside>
+
+        <section class="story__subscribe" aria-label="Подписка на KAIGHI">
+          <p>Подпишитесь, чтобы получать больше историй</p>
+          <a href="mailto:hello@kaighi.org?subject=Подписка%20на%20истории%20KAIGHI">
+            Подписаться
+          </a>
+        </section>
       </article>
     </main>
 
