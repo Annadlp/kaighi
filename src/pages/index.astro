@@ -11,9 +11,22 @@ const sections = [
 ];
 
 const publications = [
-  "Устные истории Наукана",
-  "Архив семейных фотографий",
-  "Новые тексты о языке и памяти",
+  {
+    title: "Ияин",
+    text: "Голос старого охотника из Нувукака о первой добыче, долге, море, старших и песне как способе не сдаться.",
+    label: "Рассказ",
+    href: "/stories/iyain/",
+  },
+  {
+    title: "Архив семейных фотографий",
+    text: "Материал в редакции KAIGHI: бережная работа с голосами, архивами и контекстом.",
+    label: "Публикация",
+  },
+  {
+    title: "Новые тексты о языке и памяти",
+    text: "Материал в редакции KAIGHI: бережная работа с голосами, архивами и контекстом.",
+    label: "В работе",
+  },
 ];
 
 const nightTales = [
@@ -115,13 +128,11 @@ const notes = [
         </div>
         <div class="publication-list">
           {publications.map((item, index) => (
-            <article>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <h3>{item}</h3>
-              <p>
-                Материал в редакции KAIGHI: бережная работа с голосами,
-                архивами и контекстом.
-              </p>
+            <article class={item.href ? "publication-card publication-card--link" : "publication-card"}>
+              {item.href ? <a href={item.href} aria-label={`Открыть ${item.title}`}></a> : null}
+              <span>{item.label ?? String(index + 1).padStart(2, "0")}</span>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
             </article>
           ))}
         </div>

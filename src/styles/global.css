@@ -265,6 +265,29 @@ section:not(.hero) {
   border-right: 1px solid var(--line);
 }
 
+.publication-card--link {
+  position: relative;
+}
+
+.publication-card--link > a {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+.publication-card--link h3::after {
+  content: " / открыть";
+  color: var(--ember);
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.publication-card--link:hover h3 {
+  color: var(--ember);
+}
+
 .publication-list article:last-child,
 .note-grid article:last-child {
   border-right: 0;
