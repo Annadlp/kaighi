@@ -594,7 +594,7 @@ section:not(.hero) {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(280px, 0.45fr);
   gap: clamp(28px, 7vw, 88px);
-  align-items: end;
+  align-items: start;
   padding-bottom: clamp(48px, 8vw, 86px);
   border-bottom: 1px solid rgba(255, 250, 240, 0.68);
 }
@@ -616,13 +616,14 @@ section:not(.hero) {
 }
 
 .story__hero h1 {
-  max-width: 10ch;
+  max-width: 11ch;
   margin-bottom: 0;
   color: var(--white);
-  font-size: clamp(4.4rem, 11vw, 10rem);
+  font-size: clamp(4rem, 9.1vw, 8.4rem);
 }
 
 .story__dek {
+  padding-top: clamp(12px, 2.5vw, 44px);
   margin-bottom: 0;
   color: #d6ccbc;
   font-size: clamp(1.08rem, 1.85vw, 1.42rem);
@@ -799,7 +800,7 @@ footer p {
   }
 
   .story__hero h1 {
-    font-size: clamp(3.3rem, 16vw, 5.6rem);
+    font-size: clamp(3rem, 14vw, 5rem);
   }
 
   .night__header h2,
