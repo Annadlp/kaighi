@@ -140,17 +140,40 @@ const paragraphs = [
         </aside>
 
         <section class="story__subscribe" aria-label="Подписка на KAIGHI">
-          <p>Подпишитесь, чтобы получать больше историй</p>
-          <a href="mailto:hello@kaighi.org?subject=Подписка%20на%20истории%20KAIGHI">
-            Подписаться
-          </a>
+          <div>
+            <p>Подпишитесь, чтобы получать больше историй</p>
+            <span>Новые предания, эссе и заметки KAIGHI — письмом, без шума.</span>
+          </div>
+          <form
+            action="mailto:hello@kaighi.org"
+            method="post"
+            enctype="text/plain"
+          >
+            <label for="story-subscribe-email">Email</label>
+            <input
+              id="story-subscribe-email"
+              name="email"
+              type="email"
+              placeholder="you@example.com"
+              required
+            />
+            <button type="submit">Подписаться</button>
+          </form>
         </section>
       </article>
     </main>
 
-    <footer>
-      <span>KAIGHI</span>
-      <p>Предания Ночи</p>
+    <footer class="story-footer">
+      <div>
+        <span>KAIGHI</span>
+        <p>Общественная яранга в Наукане</p>
+      </div>
+      <nav aria-label="Нижняя навигация">
+        <a href="/">Главная</a>
+        <a href="/#night-tales">Предания</a>
+        <a href="/podcast/">Подкаст</a>
+        <a href="mailto:hello@kaighi.org">hello@kaighi.org</a>
+      </nav>
     </footer>
   </body>
 </html>
