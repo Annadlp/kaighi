@@ -726,8 +726,8 @@ section:not(.hero) {
   gap: clamp(24px, 6vw, 72px);
   align-items: end;
   width: min(760px, 100%);
-  margin: clamp(88px, 12vw, 150px) auto 0;
-  padding: clamp(28px, 5vw, 46px) 0;
+  margin: clamp(150px, 18vw, 260px) auto 0;
+  padding: clamp(38px, 6vw, 58px) 0;
   border-top: 1px solid rgba(255, 250, 240, 0.68);
   border-bottom: 1px solid rgba(255, 250, 240, 0.68);
 }
