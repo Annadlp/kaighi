@@ -203,6 +203,60 @@ section:not(.hero) {
   font-size: clamp(1.05rem, 1.7vw, 1.28rem);
 }
 
+.daily-quote {
+  display: grid;
+  grid-template-columns: minmax(0, 0.28fr) minmax(0, 1fr);
+  gap: clamp(28px, 7vw, 92px);
+  align-items: start;
+}
+
+.daily-quote__label span {
+  display: block;
+  max-width: 170px;
+  color: var(--muted);
+  font-size: 0.88rem;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.daily-quote figure {
+  margin: 0;
+}
+
+.daily-quote blockquote {
+  position: relative;
+  margin: 0;
+  color: var(--ink);
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(3.1rem, 7.8vw, 8rem);
+  font-weight: 900;
+  line-height: 0.98;
+  letter-spacing: 0;
+}
+
+.daily-quote blockquote::before {
+  position: absolute;
+  top: -0.24em;
+  left: -0.38em;
+  color: var(--ember);
+  content: "“";
+  font-size: 0.72em;
+}
+
+.daily-quote figcaption {
+  max-width: 620px;
+  margin-top: clamp(22px, 4vw, 38px);
+  color: var(--muted);
+  font-size: clamp(1rem, 1.55vw, 1.2rem);
+  line-height: 1.65;
+}
+
+.daily-quote .text-link {
+  grid-column: 2;
+  width: max-content;
+  margin-top: -28px;
+}
+
 .feature {
   align-items: center;
 }
@@ -906,8 +960,22 @@ footer p {
   .recipe-card,
   .night__header,
   .podcast-hero,
-  .podcast-invite {
+  .podcast-invite,
+  .daily-quote {
     grid-template-columns: 1fr;
+  }
+
+  .daily-quote blockquote {
+    font-size: clamp(3rem, 15vw, 5.6rem);
+  }
+
+  .daily-quote blockquote::before {
+    left: -0.18em;
+  }
+
+  .daily-quote .text-link {
+    grid-column: auto;
+    margin-top: 0;
   }
 
   .podcast-hero {
