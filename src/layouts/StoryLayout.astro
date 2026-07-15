@@ -33,6 +33,8 @@ type Props = {
   backHref: string;
   backLabel: string;
   dek: string;
+  epigraph?: string;
+  epigraphAuthor?: string;
   intro?: string;
   paragraphs: string[];
   image?: StoryImage;
@@ -51,6 +53,8 @@ const {
   backHref,
   backLabel,
   dek,
+  epigraph,
+  epigraphAuthor,
   intro,
   paragraphs,
   image,
@@ -101,6 +105,12 @@ const navLabel = theme === "dark" ? "Навигация предания" : "Н�
         </header>
 
         <div class="story__body">
+          {epigraph ? (
+            <figure class="story__epigraph">
+              <blockquote>{epigraph}</blockquote>
+              {epigraphAuthor ? <figcaption>{epigraphAuthor}</figcaption> : null}
+            </figure>
+          ) : null}
           {intro ? <p class="story__intro">{intro}</p> : null}
           {image ? (
             <figure class="story__figure">

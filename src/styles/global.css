@@ -764,6 +764,26 @@ section:not(.hero) {
   padding-top: clamp(54px, 8vw, 92px);
 }
 
+.story__epigraph {
+  margin: 0 0 clamp(40px, 6vw, 68px);
+  padding-left: clamp(18px, 3vw, 30px);
+  border-left: 3px solid var(--story-accent);
+}
+
+.story__epigraph blockquote {
+  margin: 0;
+  color: var(--story-muted);
+  font-size: clamp(1.18rem, 2vw, 1.48rem);
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.story__epigraph figcaption {
+  margin-top: 14px;
+  color: var(--story-soft);
+  font-size: 0.9rem;
+}
+
 .story__body p {
   margin-bottom: 1.15em;
   color: var(--story-text);
