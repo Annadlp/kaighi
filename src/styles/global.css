@@ -694,8 +694,9 @@ section:not(.hero) {
 
 .story__hero {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: clamp(28px, 5vw, 58px);
+  grid-template-columns: minmax(0, 0.68fr) minmax(340px, 0.32fr);
+  gap: clamp(42px, 9vw, 132px);
+  align-items: end;
   padding-bottom: clamp(48px, 8vw, 86px);
   border-bottom: 1px solid var(--story-strong-line);
 }
@@ -720,12 +721,10 @@ section:not(.hero) {
   max-width: 12ch;
   margin-bottom: 0;
   color: var(--story-heading);
-  font-size: clamp(3.75rem, 8vw, 7rem);
+  font-size: clamp(3.25rem, 6.6vw, 5.8rem);
 }
 
 .story__dek {
-  width: min(520px, 100%);
-  margin-left: auto;
   margin-bottom: 0;
   color: var(--story-muted);
   font-size: clamp(1.08rem, 1.85vw, 1.42rem);

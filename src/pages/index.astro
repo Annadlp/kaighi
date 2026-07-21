@@ -37,6 +37,39 @@ const publications = [
   },
 ];
 
+const dailyQuotes = [
+  {
+    quote: "«Память — это не способность, а обязанность.»",
+    source: "Из рассказа «Нувукак»",
+    caption: "Нутэк вспоминает Наукан, язык льда, ветер и место, которое остается живым.",
+    href: "/stories/nuvukak/",
+  },
+  {
+    quote: "«Добыча — это не победа. Это долг.»",
+    source: "Из рассказа «Ияин»",
+    caption: "Ияин вспоминает первую птицу, первую нерпу и то, как человек получает место среди людей.",
+    href: "/stories/iyain/",
+  },
+  {
+    quote: "«Прочитать меня можно только целиком.»",
+    source: "Из рассказа «Собственный вектор»",
+    caption: "Рассказ-притча о координатах, власти описания и направлении, которое невозможно навязать извне.",
+    href: "/stories/sobstvennyi-vektor/",
+  },
+  {
+    quote: "«Время не лжет. Это я лгала.»",
+    source: "Из предания «Итака красива издалека»",
+    caption: "Пенелопа впервые смотрит на Итаку глазами человека, который уходит.",
+    href: "/night-tales/itaka-krasiva-izdaleka/",
+  },
+  {
+    quote: "«Где потеряли — там и бегает.»",
+    source: "Из «Сказок бабушки Наукыкэ»",
+    caption: "Короткие сказания о море, сиротах, зверях, превращениях и помощи из другого мира.",
+    href: "/night-tales/grandmother-naukyke/",
+  },
+];
+
 const nightTales = [
   {
     title: "Итака красива издалека",
@@ -105,19 +138,23 @@ const notes = [
       <section class="daily-quote" aria-label="Цитата дня">
         <div class="daily-quote__label">
           <p class="section-kicker">Цитата дня</p>
-          <span>Из рассказа «Ияин»</span>
+          <span id="daily-quote-source">{dailyQuotes[0].source}</span>
         </div>
         <figure>
-          <blockquote>
-            «Добыча — это не победа. Это долг.»
-          </blockquote>
-          <figcaption>
-            Ияин вспоминает первую птицу, первую нерпу и то, как человек
-            получает место среди людей.
-          </figcaption>
+          <blockquote id="daily-quote-text">{dailyQuotes[0].quote}</blockquote>
+          <figcaption id="daily-quote-caption">{dailyQuotes[0].caption}</figcaption>
         </figure>
-        <a class="text-link" href="/stories/iyain/">Читать рассказ</a>
+        <a class="text-link" id="daily-quote-link" href={dailyQuotes[0].href}>Читать</a>
       </section>
+
+      <script define:vars={{ dailyQuotes }}>
+        const dayIndex = Math.floor(Date.now() / 86400000) % dailyQuotes.length;
+        const quote = dailyQuotes[dayIndex];
+        document.getElementById("daily-quote-source").textContent = quote.source;
+        document.getElementById("daily-quote-text").textContent = quote.quote;
+        document.getElementById("daily-quote-caption").textContent = quote.caption;
+        document.getElementById("daily-quote-link").setAttribute("href", quote.href);
+      </script>
 
       <section class="feature grid-section" id="podcast">
         <div class="feature__image">
