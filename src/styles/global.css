@@ -694,7 +694,7 @@ section:not(.hero) {
 
 .story__hero {
   display: grid;
-  grid-template-columns: minmax(0, 0.68fr) minmax(340px, 0.32fr);
+  grid-template-columns: minmax(0, 0.58fr) minmax(340px, 0.42fr);
   gap: clamp(42px, 9vw, 132px);
   align-items: end;
   padding-bottom: clamp(48px, 8vw, 86px);
@@ -718,10 +718,10 @@ section:not(.hero) {
 }
 
 .story__hero h1 {
-  max-width: 12ch;
+  max-width: min(10ch, 100%);
   margin-bottom: 0;
   color: var(--story-heading);
-  font-size: clamp(3.25rem, 6.6vw, 5.8rem);
+  font-size: clamp(3rem, 5.6vw, 5rem);
 }
 
 .story__dek {
