@@ -473,7 +473,7 @@ section:not(.hero) {
 .recipe-card div {
   display: flex;
   flex-direction: column;
-  justify-content: end;
+  justify-content: center;
   padding: clamp(28px, 5vw, 56px);
 }
 
@@ -483,6 +483,26 @@ section:not(.hero) {
 
 .recipe-card__label {
   color: #f5b49a;
+}
+
+.recipe-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  width: max-content;
+  margin-top: 18px;
+  color: #f5b49a;
+  font-weight: 900;
+}
+
+.recipe-card__link::after {
+  content: "→";
+  transform: translateY(-1px);
+  transition: transform 180ms ease;
+}
+
+.recipe-card__link:hover::after {
+  transform: translate(4px, -1px);
 }
 
 .recipe-page {
