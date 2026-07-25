@@ -1,0 +1,131 @@
+---
+import "../../styles/global.css";
+
+const navItems = [
+  { href: "/", label: "Главная" },
+  { href: "/#kitchen", label: "Кухня" },
+  { href: "/#night-tales", label: "Предания" },
+  { href: "/podcast/", label: "Подкаст" },
+  { href: "/#contacts", label: "Контакты" },
+];
+
+const symbolism = [
+  {
+    title: "Основа",
+    text: "Цилиндр из ганаша — мир смертных, приземленный и неизменный.",
+  },
+  {
+    title: "Купол",
+    text: "Полусфера из мусса — божественный непреложный порядок.",
+  },
+  {
+    title: "Окулус",
+    text: "Вырезанное отверстие — разрыв, откровение, окно, куда осмелился заглянуть человек.",
+  },
+  {
+    title: "Осколок",
+    text: "Капля золотистой карамели или съедобное перо — смертный, который осмелился слушать.",
+  },
+];
+
+const flavors = [
+  "Темный шоколад — власть, ночь",
+  "Апельсиново-имбирный конфитюр — ясность, откровение, огонь",
+  "Щепотка перца — риск",
+  "Золотой лист — узнавание, превосходство",
+];
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Éclat d’Interdit — первый десерт кухонной линии KAIGHI: шоколадный купол о запрете, ночи, власти и откровении."
+    />
+    <title>Éclat d’Interdit — KAIGHI</title>
+  </head>
+  <body class="recipe-page">
+    <header class="site-header recipe-header" aria-label="Навигация рецепта">
+      <a class="brand" href="/" aria-label="KAIGHI">KAIGHI</a>
+      <nav>
+        {navItems.map((item) => <a href={item.href}>{item.label}</a>)}
+      </nav>
+    </header>
+
+    <main>
+      <article class="recipe-story">
+        <header class="recipe-hero">
+          <div>
+            <a class="story__back" href="/#kitchen">Назад в Кухню</a>
+            <p class="section-kicker">Ночью — миф. Днем — десерт.</p>
+            <h1>Éclat d’Interdit</h1>
+          </div>
+          <p>
+            Шоколадный купол о запрете, власти и моменте, когда смертный
+            осмеливается услышать слишком простую правду богов.
+          </p>
+        </header>
+
+        <figure class="recipe-photo">
+          <img
+            src="/images/eclat-interdit.jpg"
+            alt="Шоколадный десерт Éclat d’Interdit с темным куполом и карамельным окулусом"
+          />
+          <figcaption>
+            Гладкий темный купол, горьковато-пряная середина и карамельный
+            разрыв как окно в запретное знание.
+          </figcaption>
+        </figure>
+
+        <section class="recipe-intro grid-section">
+          <div>
+            <p class="section-kicker">Утреннее размышление</p>
+            <h2>Форма после ночного мифа</h2>
+          </div>
+          <p>
+            Я проснулась со вкусом угля и апельсиновой цедры. Это был не кошмар,
+            а новая мысль, которая должна была получить форму. Гладкий купол —
+            темный, совершенный снаружи и, как истина, горьковато-пряный внутри.
+          </p>
+        </section>
+
+        <section class="recipe-details">
+          <div>
+            <p class="section-kicker">Символизм</p>
+            <div class="recipe-symbols">
+              {symbolism.map((item) => (
+                <article>
+                  <h3>{item.title}</h3>
+                  <p>{item.text}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+
+          <aside class="recipe-flavors">
+            <p class="section-kicker">Вкусовой профиль</p>
+            <ul>
+              {flavors.map((flavor) => <li>{flavor}</li>)}
+            </ul>
+          </aside>
+        </section>
+
+        <section class="recipe-link">
+          <p>
+            Связанный миф: «Зевс, Гипнос и Тот, Кто Ночью Не Спал». Страница
+            мифа появится в «Преданиях Ночи», а десерт останется его дневной
+            формой.
+          </p>
+        </section>
+      </article>
+    </main>
+
+    <footer>
+      <span>KAIGHI</span>
+      <p>Кухня как продолжение мифа</p>
+    </footer>
+  </body>
+</html>
