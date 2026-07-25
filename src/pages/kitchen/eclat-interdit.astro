@@ -250,13 +250,13 @@ const serving = [
               <article class="recipe-method__block">
                 <h3>{block.title}</h3>
                 <div class="recipe-method__content">
-                  <div>
+                  <div class="recipe-method__ingredients">
                     <p class="recipe-method__label">Ингредиенты</p>
                     <ul>
                       {block.ingredients.map((ingredient) => <li>{ingredient}</li>)}
                     </ul>
                   </div>
-                  <div>
+                  <div class="recipe-method__steps">
                     <p class="recipe-method__label">Способ</p>
                     {block.steps.map((step) => <p>{step}</p>)}
                   </div>
@@ -276,16 +276,16 @@ const serving = [
             {assemblySteps.map((block) => (
               <article class="recipe-method__block">
                 <h3>{block.title}</h3>
-                <div class="recipe-method__content">
+                <div class={block.ingredients ? "recipe-method__content" : "recipe-method__content recipe-method__content--steps-only"}>
                   {block.ingredients ? (
-                    <div>
+                    <div class="recipe-method__ingredients">
                       <p class="recipe-method__label">Ингредиенты</p>
                       <ul>
                         {block.ingredients.map((ingredient) => <li>{ingredient}</li>)}
                       </ul>
                     </div>
                   ) : null}
-                  <div>
+                  <div class="recipe-method__steps">
                     <p class="recipe-method__label">Способ</p>
                     {block.steps.map((step) => <p>{step}</p>)}
                   </div>

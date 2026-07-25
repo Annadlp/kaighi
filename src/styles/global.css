@@ -501,6 +501,10 @@ section:not(.hero) {
   padding: 128px 0 clamp(84px, 11vw, 140px);
 }
 
+.recipe-story > section {
+  padding: clamp(46px, 7vw, 84px) 0;
+}
+
 .recipe-hero {
   display: grid;
   grid-template-columns: minmax(0, 0.66fr) minmax(320px, 0.34fr);
@@ -562,9 +566,9 @@ section:not(.hero) {
   margin-bottom: 0;
   color: var(--ink);
   font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: clamp(2.2rem, 4.8vw, 4.8rem);
+  font-size: clamp(1.8rem, 3.4vw, 3.4rem);
   font-weight: 700;
-  line-height: 0.95;
+  line-height: 1;
 }
 
 .recipe-details {
@@ -636,36 +640,67 @@ section:not(.hero) {
 
 .recipe-method {
   display: grid;
-  gap: clamp(36px, 6vw, 72px);
+  gap: clamp(28px, 5vw, 56px);
+}
+
+.recipe-method .section-heading h2,
+.recipe-serving h2 {
+  font-size: clamp(2.05rem, 4.6vw, 4.3rem);
 }
 
 .recipe-method__list {
   display: grid;
-  border-top: 1px solid var(--ink);
+  gap: 18px;
+  width: min(1040px, 100%);
+  margin: 0 auto;
 }
 
 .recipe-method__block {
   display: grid;
-  grid-template-columns: minmax(220px, 0.34fr) minmax(0, 0.66fr);
-  gap: clamp(24px, 5vw, 64px);
-  padding: clamp(28px, 4vw, 44px) 0;
-  border-bottom: 1px solid var(--line);
+  grid-template-columns: 1fr;
+  gap: 22px;
+  padding: clamp(22px, 3.2vw, 34px);
+  background: rgba(255, 250, 240, 0.58);
+  border: 1px solid var(--line);
+  border-radius: 6px;
 }
 
 .recipe-method__block h3 {
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
   margin-bottom: 0;
-  font-size: clamp(1.7rem, 3.2vw, 3rem);
+  font-size: clamp(1.45rem, 2.4vw, 2.25rem);
+  line-height: 0.98;
 }
 
 .recipe-method__content {
   display: grid;
-  grid-template-columns: minmax(190px, 0.4fr) minmax(0, 0.6fr);
-  gap: clamp(24px, 4vw, 44px);
+  grid-template-columns: minmax(190px, 0.36fr) minmax(0, 0.64fr);
+  gap: clamp(20px, 3vw, 34px);
+  align-items: start;
+}
+
+.recipe-method__content--steps-only {
+  grid-template-columns: 1fr;
+}
+
+.recipe-method__content--steps-only .recipe-method__steps {
+  max-width: 760px;
+}
+
+.recipe-method__ingredients {
+  padding: 18px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+}
+
+.recipe-method__steps {
+  max-width: 720px;
 }
 
 .recipe-method__content ul {
   display: grid;
-  gap: 8px;
+  gap: 7px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -675,11 +710,12 @@ section:not(.hero) {
 .recipe-method__content p,
 .recipe-serving p {
   color: var(--muted);
+  font-size: 0.98rem;
   line-height: 1.65;
 }
 
 .recipe-method__content p {
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .recipe-method__content p:last-child,
