@@ -926,6 +926,46 @@ section:not(.hero) {
   overflow-wrap: anywhere;
 }
 
+.community-cta {
+  display: grid;
+  grid-template-columns: minmax(0, 0.2fr) minmax(0, 0.95fr) minmax(280px, 0.55fr);
+  gap: clamp(24px, 5vw, 72px);
+  align-items: end;
+  padding-top: clamp(64px, 9vw, 112px);
+  border-top: 1px solid var(--ink);
+}
+
+.community-cta h2 {
+  max-width: 900px;
+  font-size: clamp(2.8rem, 6.8vw, 6.4rem);
+}
+
+.community-cta p:last-child,
+.community-cta div p {
+  color: var(--muted);
+  font-size: clamp(1.02rem, 1.45vw, 1.16rem);
+  line-height: 1.65;
+}
+
+.community-cta a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+  color: var(--ember);
+  font-weight: 900;
+}
+
+.community-cta a::after {
+  content: "→";
+  transform: translateY(-1px);
+  transition: transform 180ms ease;
+}
+
+.community-cta a:hover::after {
+  transform: translate(4px, -1px);
+}
+
 .podcast-page {
   background: var(--white);
 }
@@ -1406,6 +1446,34 @@ footer p {
   color: var(--story-muted, #d6ccbc);
 }
 
+.site-footer {
+  display: grid;
+  grid-template-columns: minmax(0, 0.45fr) minmax(0, 0.55fr);
+  align-items: start;
+  padding: clamp(34px, 5vw, 56px) clamp(18px, 4vw, 48px);
+}
+
+.site-footer span {
+  display: block;
+  margin-bottom: 8px;
+  font-size: clamp(2.2rem, 5vw, 4.8rem);
+  line-height: 0.9;
+}
+
+.site-footer nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 14px 24px;
+}
+
+.site-footer nav a {
+  color: var(--white);
+  font-size: 0.82rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
 @media (max-width: 780px) {
   .site-header {
     position: absolute;
@@ -1454,6 +1522,8 @@ footer p {
   .recipe-method__content,
   .recipe-notes,
   .recipe-actions,
+  .community-cta,
+  .site-footer,
   .night__header,
   .podcast-hero,
   .podcast-invite,
@@ -1585,6 +1655,10 @@ footer p {
 
   footer {
     display: grid;
+  }
+
+  .site-footer nav {
+    justify-content: flex-start;
   }
 }
 
