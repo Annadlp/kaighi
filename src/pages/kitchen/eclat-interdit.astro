@@ -1,5 +1,6 @@
 ---
 import "../../styles/global.css";
+import RecipeActions from "../../components/RecipeActions.astro";
 
 const navItems = [
   { href: "/", label: "Главная" },
@@ -314,12 +315,22 @@ const serving = [
             Десерт остается его дневной формой.
           </p>
         </section>
+
+        <RecipeActions title="Éclat d’Interdit" />
       </article>
     </main>
 
-    <footer>
-      <span>KAIGHI</span>
-      <p>Кухня как продолжение мифа</p>
+    <footer class="recipe-footer">
+      <div>
+        <span>KAIGHI</span>
+        <p>Кухня как продолжение мифа</p>
+      </div>
+      <nav aria-label="Нижняя навигация">
+        <a href="/">Главная</a>
+        <a href="/#kitchen">Кухня</a>
+        <a href="/#night-tales">Предания</a>
+        <a href="mailto:hello@kaighi.org">hello@kaighi.org</a>
+      </nav>
     </footer>
   </body>
 </html>

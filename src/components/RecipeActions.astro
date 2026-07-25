@@ -1,0 +1,67 @@
+---
+type Props = {
+  title: string;
+};
+
+const { title } = Astro.props;
+---
+
+<section class="recipe-actions" aria-label="Сохранить и поделиться рецептом">
+  <div>
+    <p class="section-kicker">Поделиться</p>
+    <h2>Сохранить рецепт</h2>
+  </div>
+  <div class="recipe-actions__panel">
+    <p>
+      Ссылка сохранит рецепт вместе с историей. Печать откроет спокойную версию
+      страницы без навигации.
+    </p>
+    <div class="recipe-actions__buttons">
+      <button type="button" data-copy-recipe>Сохранить ссылку</button>
+      <button type="button" data-print-recipe>Распечатать</button>
+    </div>
+    <div class="recipe-actions__share" aria-label="Поделиться в соцсетях">
+      <a href="#" data-share-network="telegram">Telegram</a>
+      <a href="#" data-share-network="facebook">Facebook</a>
+      <a href="#" data-share-network="whatsapp">WhatsApp</a>
+    </div>
+    <p class="recipe-actions__status" aria-live="polite" data-recipe-status></p>
+  </div>
+</section>
+
+<script define:vars={{ title }}>
+  const pageUrl = window.location.href;
+  const pageTitle = `${title} — KAIGHI`;
+  const encodedUrl = encodeURIComponent(pageUrl);
+  const encodedTitle = encodeURIComponent(pageTitle);
+
+  const shareLinks = {
+    telegram: `https://t.me/share/url?url=${encodedUrl}&text=${encodedTitle}`,
+    facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
+    whatsapp: `https://wa.me/?text=${encodedTitle}%20${encodedUrl}`,
+  };
+
+  document.querySelectorAll("[data-share-network]").forEach((link) => {
+    const network = link.getAttribute("data-share-network");
+    link.setAttribute("href", shareLinks[network]);
+    link.setAttribute("target", "_blank");
+    link.setAttribute("rel", "noopener noreferrer");
+  });
+
+  const status = document.querySelector("[data-recipe-status]");
+  const copyButton = document.querySelector("[data-copy-recipe]");
+  const printButton = document.querySelector("[data-print-recipe]");
+
+  copyButton?.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(pageUrl);
+      status.textContent = "Ссылка скопирована.";
+    } catch {
+      status.textContent = "Скопируйте адрес из строки браузера.";
+    }
+  });
+
+  printButton?.addEventListener("click", () => {
+    window.print();
+  });
+</script>

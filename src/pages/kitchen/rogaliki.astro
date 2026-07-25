@@ -1,5 +1,6 @@
 ---
 import "../../styles/global.css";
+import RecipeActions from "../../components/RecipeActions.astro";
 
 const navItems = [
   { href: "/", label: "Главная" },
@@ -159,12 +160,22 @@ const afterword = [
             {afterword.map((paragraph) => <p>{paragraph}</p>)}
           </div>
         </section>
+
+        <RecipeActions title="Рогалики" />
       </article>
     </main>
 
-    <footer>
-      <span>KAIGHI</span>
-      <p>Кухня как продолжение памяти</p>
+    <footer class="recipe-footer">
+      <div>
+        <span>KAIGHI</span>
+        <p>Кухня как продолжение памяти</p>
+      </div>
+      <nav aria-label="Нижняя навигация">
+        <a href="/">Главная</a>
+        <a href="/#kitchen">Кухня</a>
+        <a href="/#stories">Рассказы</a>
+        <a href="mailto:hello@kaighi.org">hello@kaighi.org</a>
+      </nav>
     </footer>
   </body>
 </html>
