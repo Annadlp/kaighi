@@ -611,6 +611,12 @@ section:not(.hero) {
   font-size: clamp(1.08rem, 1.65vw, 1.26rem);
 }
 
+.recipe-link .text-link {
+  display: inline;
+  margin-top: 0;
+  padding-bottom: 2px;
+}
+
 .note-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
