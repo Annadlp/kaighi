@@ -481,6 +481,19 @@ section:not(.hero) {
   color: #ddd3c4;
 }
 
+.recipe-stack {
+  display: grid;
+  gap: 18px;
+}
+
+.recipe-card--compact {
+  grid-template-columns: minmax(0, 0.85fr) minmax(300px, 1.15fr);
+}
+
+.recipe-card--compact img {
+  min-height: 340px;
+}
+
 .recipe-card__label {
   color: #f5b49a;
 }
@@ -749,6 +762,45 @@ section:not(.hero) {
   font-size: 0.78rem;
   font-weight: 900;
   text-transform: uppercase;
+}
+
+.recipe-prose p,
+.recipe-notes li {
+  color: var(--muted);
+  font-size: clamp(1.02rem, 1.45vw, 1.16rem);
+  line-height: 1.75;
+}
+
+.recipe-prose p {
+  margin-bottom: 1.05em;
+}
+
+.recipe-prose p:last-child {
+  margin-bottom: 0;
+}
+
+.recipe-notes {
+  display: grid;
+  grid-template-columns: minmax(0, 0.38fr) minmax(0, 0.62fr);
+  gap: clamp(30px, 7vw, 86px);
+  border-bottom: 1px solid var(--line);
+}
+
+.recipe-notes ul {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.recipe-notes li {
+  padding: 0 0 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.recipe-notes li:last-child {
+  border-bottom: 0;
 }
 
 .recipe-serving {
@@ -1323,6 +1375,7 @@ footer p {
   .recipe-yield,
   .recipe-method__block,
   .recipe-method__content,
+  .recipe-notes,
   .night__header,
   .podcast-hero,
   .podcast-invite,
