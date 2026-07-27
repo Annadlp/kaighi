@@ -4,8 +4,8 @@ import RecipeActions from "../../components/RecipeActions.astro";
 
 const navItems = [
   { href: "/", label: "Главная" },
-  { href: "/#kitchen", label: "Кухня" },
-  { href: "/#night-tales", label: "Предания" },
+  { href: "/kitchen/", label: "Кухня" },
+  { href: "/night-tales/", label: "Предания" },
   { href: "/podcast/", label: "Подкаст" },
   { href: "/#contacts", label: "Контакты" },
 ];
@@ -76,7 +76,7 @@ const afterword = [
       <article class="recipe-story">
         <header class="recipe-hero">
           <div>
-            <a class="story__back" href="/#kitchen">Назад в Кухню</a>
+            <a class="story__back" href="/kitchen/">Назад в Кухню</a>
             <p class="section-kicker">Почему появилась кухня</p>
             <h1>Рогалики</h1>
           </div>
@@ -172,8 +172,8 @@ const afterword = [
       </div>
       <nav aria-label="Нижняя навигация">
         <a href="/">Главная</a>
-        <a href="/#kitchen">Кухня</a>
-        <a href="/#stories">Рассказы</a>
+        <a href="/kitchen/">Кухня</a>
+        <a href="/stories/">Рассказы</a>
         <a href="mailto:hello@kaighi.org">hello@kaighi.org</a>
       </nav>
     </footer>

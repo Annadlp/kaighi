@@ -1,0 +1,89 @@
+---
+import "../../styles/global.css";
+
+const navItems = [
+  { href: "/", label: "Главная" },
+  { href: "/kitchen/", label: "Кухня" },
+  { href: "/stories/", label: "Рассказы" },
+  { href: "/night-tales/", label: "Предания" },
+  { href: "/podcast/", label: "Подкаст" },
+  { href: "/#contacts", label: "Контакты" },
+];
+
+const recipes = [
+  {
+    title: "Рогалики",
+    text: "История о книге «500 блюд для северян», рецепте без яиц, твороге с вареньем и первом вкусе собственного изобретения.",
+    label: "Семейная выпечка",
+    href: "/kitchen/rogaliki/",
+    image: "/images/rogaliki.jpg",
+    alt: "Домашние рогалики с сахарной пудрой",
+  },
+  {
+    title: "Éclat d’Interdit",
+    text: "Шоколадный купол о запрете, ночи и моменте, когда смертный осмеливается услышать слишком простую правду богов.",
+    label: "Десерт",
+    href: "/kitchen/eclat-interdit/",
+    image: "/images/eclat-interdit.jpg",
+    alt: "Шоколадный десерт Éclat d’Interdit",
+  },
+];
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Кухня KAIGHI: рецепты с фотографиями, семейные истории, выпечка, десерты и еда как форма памяти." />
+    <title>Кухня — KAIGHI</title>
+  </head>
+  <body class="catalog-page">
+    <header class="site-header catalog-header" aria-label="Навигация кухни">
+      <a class="brand" href="/" aria-label="KAIGHI">KAIGHI</a>
+      <nav>
+        {navItems.map((item) => <a href={item.href}>{item.label}</a>)}
+      </nav>
+    </header>
+
+    <main>
+      <section class="catalog-hero">
+        <a class="story__back" href="/">На главную</a>
+        <p class="section-kicker">Кухня</p>
+        <h1>Рецепты с фотографиями</h1>
+        <p>
+          Кухня KAIGHI держит вместе практику и память: семейные рецепты,
+          старые книги, новые десерты, вкус детства и истории, которые
+          начинаются с еды.
+        </p>
+      </section>
+
+      <section class="recipe-catalog" aria-label="Все рецепты">
+        {recipes.map((item) => (
+          <article>
+            <img src={item.image} alt={item.alt} />
+            <div>
+              <span>{item.label}</span>
+              <h2>{item.title}</h2>
+              <p>{item.text}</p>
+              <a class="recipe-card__link" href={item.href}>Открыть рецепт</a>
+            </div>
+          </article>
+        ))}
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <span>KAIGHI</span>
+        <p>Кухня</p>
+      </div>
+      <nav aria-label="Нижняя навигация">
+        <a href="/">Главная</a>
+        <a href="/stories/">Рассказы</a>
+        <a href="/night-tales/">Предания</a>
+        <a href="mailto:hello@kaighi.org">hello@kaighi.org</a>
+      </nav>
+    </footer>
+  </body>
+</html>

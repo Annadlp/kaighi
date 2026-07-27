@@ -1,0 +1,99 @@
+---
+import "../../styles/global.css";
+
+const navItems = [
+  { href: "/", label: "Главная" },
+  { href: "/night-tales/", label: "Предания" },
+  { href: "/stories/", label: "Рассказы" },
+  { href: "/kitchen/", label: "Кухня" },
+  { href: "/podcast/", label: "Подкаст" },
+  { href: "/#contacts", label: "Контакты" },
+];
+
+const tales = [
+  {
+    title: "Миф о тех, чей рай - не сад, а берег",
+    text: "Души тринадцати охотников и их семей не пришли в сады, потому что их рай был на берегу.",
+    label: "Миф",
+    href: "/night-tales/rai-ne-sad-a-bereg/",
+  },
+  {
+    title: "Итака красива издалека",
+    text: "Пенелопа перестает быть символом ожидания и впервые смотрит на остров глазами человека, который уходит.",
+    label: "Предание",
+    href: "/night-tales/itaka-krasiva-izdaleka/",
+  },
+  {
+    title: "Асая",
+    text: "Темное предание о красоте, зависти, живой парке и реке, которая знает цену чужой жизни.",
+    label: "Предание",
+    href: "/night-tales/asaya/",
+  },
+  {
+    title: "Сказки бабушки Наукыкэ",
+    text: "Короткие сказания о море, сиротах, белухе, зайце, касатке и паучьей нити, которая спасает жизнь.",
+    label: "Сказания",
+    href: "/night-tales/grandmother-naukyke/",
+  },
+  {
+    title: "Зевс, Гипнос и Тот, Кто Ночью Не Спал",
+    text: "Миф о споре Зевса и Гипноса, власти как привычке и человеке, который услышал разговор богов.",
+    label: "Миф",
+    href: "/night-tales/zeus-hypnos-i-tot-kto-nochyu-ne-spal/",
+  },
+];
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Все предания KAIGHI: мифы, сказания и темные истории, которые лучше звучат после заката." />
+    <title>Предания Ночи — KAIGHI</title>
+  </head>
+  <body class="catalog-page catalog-page--dark">
+    <header class="site-header catalog-header" aria-label="Навигация преданий">
+      <a class="brand" href="/" aria-label="KAIGHI">KAIGHI</a>
+      <nav>
+        {navItems.map((item) => <a href={item.href}>{item.label}</a>)}
+      </nav>
+    </header>
+
+    <main>
+      <section class="catalog-hero">
+        <a class="story__back" href="/">На главную</a>
+        <p class="section-kicker">Мифы и Франчины сказки</p>
+        <h1>Предания Ночи</h1>
+        <p>
+          Инвертированный архив для историй, которые приходят после заката:
+          мифов, сказаний, превращений и голосов, говорящих из темной памяти.
+        </p>
+      </section>
+
+      <section class="catalog-list catalog-list--dark" aria-label="Все предания">
+        {tales.map((item) => (
+          <article>
+            <a href={item.href} aria-label={`Открыть ${item.title}`}></a>
+            <span>{item.label}</span>
+            <h2>{item.title}</h2>
+            <p>{item.text}</p>
+          </article>
+        ))}
+      </section>
+    </main>
+
+    <footer class="site-footer story-footer">
+      <div>
+        <span>KAIGHI</span>
+        <p>Предания Ночи</p>
+      </div>
+      <nav aria-label="Нижняя навигация">
+        <a href="/">Главная</a>
+        <a href="/stories/">Рассказы</a>
+        <a href="/kitchen/">Кухня</a>
+        <a href="mailto:hello@kaighi.org">hello@kaighi.org</a>
+      </nav>
+    </footer>
+  </body>
+</html>

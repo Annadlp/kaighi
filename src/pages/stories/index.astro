@@ -1,0 +1,111 @@
+---
+import "../../styles/global.css";
+
+const navItems = [
+  { href: "/", label: "Главная" },
+  { href: "/stories/", label: "Рассказы" },
+  { href: "/night-tales/", label: "Предания" },
+  { href: "/kitchen/", label: "Кухня" },
+  { href: "/podcast/", label: "Подкаст" },
+  { href: "/#contacts", label: "Контакты" },
+];
+
+const stories = [
+  {
+    title: "Язык. La Lengua",
+    text: "Рассказ о Малиналли, переводе как власти, вине без одного языка и месте между двумя мирами.",
+    label: "Историческая фантазия",
+    href: "/stories/la-lengua/",
+  },
+  {
+    title: "Гамбит Ануки",
+    text: "Шахматная партия во время обыска, придуманный на китобойном судне гамбит и игра, которую нужно сыграть до конца.",
+    label: "Рассказ",
+    href: "/stories/gambit-anuki/",
+  },
+  {
+    title: "Нувукак",
+    text: "Нутэк, больничная палата, язык льда и память о селе, которое остается живым.",
+    label: "Рассказ",
+    href: "/stories/nuvukak/",
+  },
+  {
+    title: "Ияин",
+    text: "Голос старого охотника из Нувукака о первой добыче, долге, море и песне как способе не сдаться.",
+    label: "Рассказ",
+    href: "/stories/iyain/",
+  },
+  {
+    title: "Зеленый помидор",
+    text: "Историческая миниатюра о последнем выборе взрослого, детях и руке, которую нельзя разжать.",
+    label: "Историческая миниатюра",
+    href: "/stories/zelenyi-pomidor/",
+  },
+  {
+    title: "Мастер на все руки",
+    text: "Бывший помощник шерифа, самодельная клетка, власть и запах вины, от которого невозможно отмыться.",
+    label: "Рассказ",
+    href: "/stories/master-na-vse-ruki/",
+  },
+  {
+    title: "Собственный вектор",
+    text: "Рассказ-притча о координатах, власти описания и направлении, которое невозможно навязать извне.",
+    label: "Рассказ-притча",
+    href: "/stories/sobstvennyi-vektor/",
+  },
+];
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Все рассказы KAIGHI: художественные тексты, исторические фантазии, притчи и голоса памяти." />
+    <title>Рассказы — KAIGHI</title>
+  </head>
+  <body class="catalog-page">
+    <header class="site-header catalog-header" aria-label="Навигация рассказов">
+      <a class="brand" href="/" aria-label="KAIGHI">KAIGHI</a>
+      <nav>
+        {navItems.map((item) => <a href={item.href}>{item.label}</a>)}
+      </nav>
+    </header>
+
+    <main>
+      <section class="catalog-hero">
+        <a class="story__back" href="/">На главную</a>
+        <p class="section-kicker">Рассказы</p>
+        <h1>Рассказы на разные голоса</h1>
+        <p>
+          Художественные тексты KAIGHI: голоса, исторические видения, притчи и
+          истории о памяти, выборе, языке, долге и своем направлении.
+        </p>
+      </section>
+
+      <section class="catalog-list" aria-label="Все рассказы">
+        {stories.map((item) => (
+          <article>
+            <a href={item.href} aria-label={`Открыть ${item.title}`}></a>
+            <span>{item.label}</span>
+            <h2>{item.title}</h2>
+            <p>{item.text}</p>
+          </article>
+        ))}
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <span>KAIGHI</span>
+        <p>Рассказы</p>
+      </div>
+      <nav aria-label="Нижняя навигация">
+        <a href="/">Главная</a>
+        <a href="/night-tales/">Предания</a>
+        <a href="/kitchen/">Кухня</a>
+        <a href="mailto:hello@kaighi.org">hello@kaighi.org</a>
+      </nav>
+    </footer>
+  </body>
+</html>

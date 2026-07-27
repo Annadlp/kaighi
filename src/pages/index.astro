@@ -3,9 +3,9 @@ import "../styles/global.css";
 
 const sections = [
   { href: "/podcast/", label: "Подкаст" },
-  { href: "#stories", label: "Рассказы" },
-  { href: "#night-tales", label: "Предания" },
-  { href: "#kitchen", label: "Кухня" },
+  { href: "/stories/", label: "Рассказы" },
+  { href: "/night-tales/", label: "Предания" },
+  { href: "/kitchen/", label: "Кухня" },
   { href: "#blog", label: "Блог" },
   { href: "#contacts", label: "Контакты" },
 ];
@@ -52,6 +52,29 @@ const publications = [
     text: "Рассказ-притча о координатах, власти описания и направлении, которое невозможно навязать извне.",
     label: "Рассказ-притча",
     href: "/stories/sobstvennyi-vektor/",
+  },
+];
+
+const entryPoints = [
+  {
+    title: "Читать",
+    text: "Рассказы, исторические фантазии и голоса людей, которые остаются с нами после последней строки.",
+    href: "#stories",
+  },
+  {
+    title: "Слушать",
+    text: "Подкаст Why Indigenous Women Love. And Laugh. — разговоры о любви, языке, памяти и смехе.",
+    href: "/podcast/",
+  },
+  {
+    title: "Готовить",
+    text: "Рецепты с фотографиями и историями: кухня как способ вспомнить дом, книгу, маму, берег.",
+    href: "#kitchen",
+  },
+  {
+    title: "Вспоминать",
+    text: "Предания, семейная память, мифы и вопросы, которые возвращают человека к своему месту.",
+    href: "#night-tales",
   },
 ];
 
@@ -127,6 +150,9 @@ const nightTales = [
   },
 ];
 
+const featuredPublications = publications.slice(0, 4);
+const featuredNightTales = nightTales.slice(0, 4);
+
 const notes = [
   { kind: "Рецензия", title: "Книга, которую читают вслух", meta: "12 июня" },
   { kind: "Кино", title: "Север без открытки", meta: "28 мая" },
@@ -160,9 +186,26 @@ const notes = [
           <p class="eyebrow">Общественная яранга в Наукане</p>
           <h1>KAIGHI</h1>
           <p class="lede">
-            Место для голосов, рецептов, памяти и смеха. Здесь встречаются
-            подкаст, тексты, кухня и дневник живой северной культуры.
+            Место для голосов, рецептов, памяти и смеха. Здесь собираются
+            истории о доме, языке, родстве, утрате, еде и том, как человек
+            остается связанным со своими.
           </p>
+        </div>
+      </section>
+
+      <section class="entryways" aria-label="Что можно найти в KAIGHI">
+        <div class="section-heading">
+          <p class="section-kicker">Если вы впервые здесь</p>
+          <h2>Выберите, с чего войти в ярангу</h2>
+        </div>
+        <div class="entryway-grid">
+          {entryPoints.map((item) => (
+            <article>
+              <a href={item.href} aria-label={`Перейти: ${item.title}`}></a>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </article>
+          ))}
         </div>
       </section>
 
@@ -205,11 +248,11 @@ const notes = [
 
       <section class="split" id="stories">
         <div class="section-heading">
-          <p class="section-kicker">Рассказы и публикации</p>
-          <h2>Рассказы на разные голоса</h2>
+          <p class="section-kicker">Новые тексты</p>
+          <h2>С чего начать читать</h2>
         </div>
         <div class="publication-list">
-          {publications.map((item, index) => (
+          {featuredPublications.map((item, index) => (
             <article class={item.href ? "publication-card publication-card--link" : "publication-card"}>
               {item.href ? <a href={item.href} aria-label={`Открыть ${item.title}`}></a> : null}
               <span>{item.label ?? String(index + 1).padStart(2, "0")}</span>
@@ -218,6 +261,20 @@ const notes = [
             </article>
           ))}
         </div>
+        <a class="section-more" href="/stories/">Все рассказы</a>
+      </section>
+
+      <section class="memory-prompt">
+        <div>
+          <p class="section-kicker">Своя память</p>
+          <h2>Какая история живет в вашей семье?</h2>
+        </div>
+        <p>
+          Иногда память начинается не с архива, а с фразы, блюда, фотографии,
+          странной книги на полке, песни, которую кто-то помнит не до конца.
+          KAIGHI держит место и для таких частных следов: из них складывается
+          большая человеческая карта.
+        </p>
       </section>
 
       <section class="night" id="night-tales">
@@ -231,7 +288,7 @@ const notes = [
           </p>
         </div>
         <div class="night__grid">
-          {nightTales.map((tale, index) => (
+          {featuredNightTales.map((tale, index) => (
             <article class={tale.href ? "night-card night-card--link" : "night-card"}>
               {tale.href ? <a href={tale.href} aria-label={`Открыть ${tale.title}`}></a> : null}
               <span>{tale.label ?? String(index + 1).padStart(2, "0")}</span>
@@ -240,6 +297,7 @@ const notes = [
             </article>
           ))}
         </div>
+        <a class="section-more section-more--dark" href="/night-tales/">Все предания</a>
       </section>
 
       <section class="kitchen" id="kitchen">
@@ -273,6 +331,7 @@ const notes = [
             </div>
           </div>
         </div>
+        <a class="section-more" href="/kitchen/">Все рецепты</a>
       </section>
 
       <section class="blog" id="blog">
