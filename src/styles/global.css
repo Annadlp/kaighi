@@ -969,10 +969,30 @@ section:not(.hero) {
 }
 
 .note-grid article {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   background: rgba(255, 250, 243, 0.52);
+}
+
+.note-card--link > a {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.note-card--link h3::after {
+  content: " / читать";
+  color: var(--ember);
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.note-card--link:hover h3 {
+  color: var(--ember);
 }
 
 .note-grid p {

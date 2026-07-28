@@ -154,6 +154,12 @@ const featuredPublications = publications.slice(0, 4);
 const featuredNightTales = nightTales.slice(0, 4);
 
 const notes = [
+  {
+    kind: "Язык",
+    title: "Языки не умирают сами",
+    meta: "О статье The New Yorker",
+    href: "/blog/yazyki-ne-umirayut-sami/",
+  },
   { kind: "Рецензия", title: "Книга, которую читают вслух", meta: "12 июня" },
   { kind: "Кино", title: "Север без открытки", meta: "28 мая" },
   { kind: "Мысль", title: "Как смеяться, когда разговор серьезный", meta: "3 мая" },
@@ -341,7 +347,8 @@ const notes = [
         </div>
         <div class="note-grid">
           {notes.map((note) => (
-            <article>
+            <article class={note.href ? "note-card note-card--link" : "note-card"}>
+              {note.href ? <a href={note.href} aria-label={`Открыть ${note.title}`}></a> : null}
               <p>{note.kind}</p>
               <h3>{note.title}</h3>
               <span>{note.meta}</span>
